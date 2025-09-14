@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wunschpunsch!</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Flavors&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background-image: url('https://radika1.link/2025/08/01/ra_forum_background_img_08c2550a6ef5a7985.jpg');
+            background-size: auto;
+            background-position: center;
+            color: #f4e4bc;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 20px;
+        }
+
+        /* 1. Контейнер с названием */
+        .title-container h1 {
+            font-family: "Flavors", cursive;
+            font-size: 5em;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            margin: 0;
+            background: linear-gradient(90deg, #6F7228, #C0B065);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        /* 2. Контейнер с именем */
+        .name-container {
+            min-height: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .student-name {
+            font-family: 'Neucha', cursive;
+            font-size: 2em;
+            color: #A7875E;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            background-clip: text;
+            text-fill-color: transparent;
+            padding: 5px 15px;
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        .name-input-container {
+            background: rgba(0,0,0,0.3);
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #8b4513;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .name-title {
+            font-family: 'Neucha', cursive;
+            font-size: 1.5em;
+            color: #A7875E;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            margin: 0;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .name-input {
+            padding: 12px 15px;
+            font-size: 1.1em;
+            border: 2px solid #8b4513;
+            border-radius: 5px;
+            background: #f4e4bc;
+            color: #2c1810;
+            font-family: 'Neucha', cursive;
+            flex: 1;
+            max-width: 250px;
+        }
+
+        /* 3. Контейнер с цифрами */
+        .numbers-container {
+            height: 100px;
+            width: 350px;
+            position: relative;
+            margin: 10px 0;
+        }
+
+        .dice {
+            font-family: "Flavors", cursive;
+            font-weight: bold;
+            color: #BBAB5F;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            animation: appear 0.5s ease-out;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes appear {
+            0% { 
+                transform: translateY(30px) scale(0.5); 
+                opacity: 0; 
+            }
+            100% { 
+                transform: translateY(0) scale(1); 
+                opacity: 1; 
+            }
+        }
+
+        /* 4. Контейнер с котлом */
+        .cauldron-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .cauldron-image {
+            max-width: 300px;
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border-radius: 10px;
+            filter: drop-shadow(0 0 8px rgba(107, 70, 34, 0.7));
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 8px rgba(107, 70, 34, 0.7));
+            }
+            50% {
+                transform: scale(1.05);
+                filter: drop-shadow(0 0 12px rgba(107, 70, 34, 0.9));
+            }
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 8px rgba(107, 70, 34, 0.7));
+            }
+        }
+
+        .cauldron-image:hover {
+            animation: none; /* Останавливаем пульсацию при наведении */
+            transform: scale(1.3) rotate(0deg);
+            filter: drop-shadow(0 0 15px #C0B065);
+        }
+
+        /* 5. Контейнер с настройками */
+        .settings-container {
+            background: rgba(0,0,0,0.3);
+            padding: 15px 20px;
+            border-radius: 10px;
+            border: 2px solid #8b4513;
+            width: 90%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 40px; 
+        }
+
+        .settings-title {
+            font-family: 'Neucha', cursive;
+            font-size: 1.3em;
+            color: #A7875E;
+            margin: 0 0 10px 0;
+            text-align: center;
+        }
+        
+        .setting-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .setting-group label {
+            font-size: 1em;
+        }
+
+        .setting-group select {
+            padding: 5px 10px;
+            font-size: 0.9em;
+            border: 2px solid #8b4513;
+            border-radius: 5px;
+            background: #f4e4bc;
+            color: #2c1810;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            font-size: 1.1em;
+            color: #2c1810;
+            border: 2px solid #8b4513;
+            border-radius: 5px;
+            background: #f4e4bc;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.4);
+            transition: transform 0.2s ease;
+            font-family: 'Neucha', cursive;
+            white-space: nowrap;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 5px 5px 12px rgba(0,0,0,0.6);
+        }
+    </style>
+</head>
+<body>
+    <!-- 1. Контейнер с названием -->
+    <div class="title-container">
+        <h1>Wunschpunsch!</h1>
+    </div>
+    
+    <!-- 2. Контейнер с именем -->
+    <div class="name-container">
+        <div class="name-input-container" id="nameInputContainer">
+            <div class="name-title">Подпишите флакон со своим зельем:</div>
+            <div class="input-group">
+                <input type="text" id="nameInput" class="name-input" placeholder="Имя Фамилия">
+                <button class="btn" onclick="setStudentName()">OK</button>
+            </div>
+        </div>
+        <div class="student-name" id="studentName" style="display: none;"></div>
+    </div>
+
+    <!-- 3. Контейнер с цифрами -->
+    <div class="numbers-container" id="numbersContainer"></div>
+
+    <!-- 4. Контейнер с котлом -->
+    <div class="cauldron-container">
+        <img src="https://radika1.link/2025/09/14/20250908_1355_KOTEL-SO-ZELEM_remix_01k4mfcvsmfmyr25v4ek654vnw-1-1c011b9cf756a833b.png" 
+             alt="Волшебный котел" 
+             class="cauldron-image" 
+             onclick="rollDice()"
+             id="cauldronImg">
+    </div>
+
+    <!-- 5. Контейнер с настройками -->
+    <div class="settings-container">
+        <div class="settings-title">Бросить нефритовые осколки в котел:</div>
+        <div class="setting-group">
+            <label for="diceCount">Количество осколков:</label>
+            <select id="diceCount">
+                <option value="1">1</option>
+                <option value="2" selected>2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+            </select>
+        </div>
+        
+        <div class="setting-group">
+            <label for="diceSides">Количество граней у каждого осколка:</label>
+            <select id="diceSides">
+                <option value="4">4</option>
+                <option value="6" selected>6</option>
+                <option value="8">8</option>
+                <option value="10">10</option>
+                <option value="12">12</option>
+                <option value="20">20</option>
+                <option value="100">100</option>
+            </select>
+        </div>
+    </div>
+
+    <script>
+        function setStudentName() {
+            const nameInput = document.getElementById('nameInput');
+            const name = nameInput.value.trim();
+            
+            if (name) {
+                document.getElementById('studentName').textContent = name;
+                document.getElementById('studentName').style.display = 'block';
+                document.getElementById('nameInputContainer').style.display = 'none';
+            } else {
+                alert('Пожалуйста, введите имя!');
+            }
+        }
+
+        function getRandomNumber(min, max) {
+            const array = new Uint32Array(1);
+            crypto.getRandomValues(array);
+            return Math.floor((array[0] / (0xffffffff + 1)) * (max - min + 1)) + min;
+        }
+
+        function rollDice() {
+            const diceCount = parseInt(document.getElementById('diceCount').value);
+            const diceSides = parseInt(document.getElementById('diceSides').value);
+            const numbersContainer = document.getElementById('numbersContainer');
+            
+            // Очищаем предыдущие цифры
+            numbersContainer.innerHTML = '';
+            
+            // Настройка области для размещения цифр
+            const containerWidth = numbersContainer.offsetWidth;
+            const containerHeight = numbersContainer.offsetHeight;
+            
+            // Массив для хранения позиций уже размещенных цифр
+            const placedPositions = [];
+            
+            // Создаем новые цифры
+            for (let i = 0; i < diceCount; i++) {
+                setTimeout(() => {
+                    const dice = document.createElement('div');
+                    dice.className = 'dice';
+                    const randomNumber = getRandomNumber(1, diceSides);
+                    dice.textContent = randomNumber;
+                    
+                    // Случайный размер от 30px до 50px
+                    const randomSize = getRandomNumber(30, 50);
+                    dice.style.fontSize = `${randomSize}px`;
+                    
+                    // Случайный поворот от -25 до 25 градусов
+                    const randomRotation = getRandomNumber(-25, 25);
+                    dice.style.transform = `rotate(${randomRotation}deg)`;
+                    
+                    // Рассчитываем максимальные координаты с учетом размера цифры
+                    const maxLeft = containerWidth - randomSize;
+                    const maxTop = containerHeight - randomSize;
+                    
+                    // Пытаемся найти позицию, которая не пересекается с другими цифрами
+                    let attempts = 0;
+                    let positionFound = false;
+                    let randomLeft, randomTop;
+                    
+                    while (attempts < 30 && !positionFound) {
+                        randomLeft = getRandomNumber(0, maxLeft);
+                        randomTop = getRandomNumber(0, maxTop);
+                        
+                        // Проверяем, не пересекается ли эта позиция с уже размещенными цифрами
+                        positionFound = true;
+                        for (const pos of placedPositions) {
+                            const distance = Math.sqrt(
+                                Math.pow(randomLeft + randomSize/2 - (pos.left + pos.size/2), 2) + 
+                                Math.pow(randomTop + randomSize/2 - (pos.top + pos.size/2), 2)
+                            );
+                            
+                            // Если расстояние меньше суммы радиусов, значит пересекаются
+                            if (distance < (randomSize + pos.size) * 0.6) {
+                                positionFound = false;
+                                break;
+                            }
+                        }
+                        
+                        attempts++;
+                    }
+                    
+                    // Если не нашли подходящую позицию после 30 попыток, размещаем в случайном месте
+                    if (!positionFound) {
+                        randomLeft = getRandomNumber(0, maxLeft);
+                        randomTop = getRandomNumber(0, maxTop);
+                    }
+                    
+                    // Сохраняем информацию о размещенной цифре
+                    placedPositions.push({
+                        left: randomLeft,
+                        top: randomTop,
+                        size: randomSize
+                    });
+                    
+                    dice.style.left = `${randomLeft}px`;
+                    dice.style.top = `${randomTop}px`;
+                    
+                    numbersContainer.appendChild(dice);
+                }, i * 100); // Задержка для эффекта появления
+            }
+        }
+
+        // Обработка Enter в поле ввода имени
+        document.getElementById('nameInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                setStudentName();
+            }
+        });
+    </script>
+</body>
+</html>
