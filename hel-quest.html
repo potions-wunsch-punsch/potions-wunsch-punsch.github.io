@@ -471,20 +471,6 @@
             gap: 20px;
         }
 
-        #participantImageContainer {
-            position: relative;
-            width: 100%;
-            max-width: 300px;
-            background: transparent;
-        }
-
-        #participantImage {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 10px;
-        }
-
         #participantAngerContainer {
             width: 100%;
             max-width: 600px;
@@ -546,8 +532,195 @@
             box-shadow: 0 5px 20px rgba(93, 76, 58, 0.6);
         }
 
-        .anger-bar-participant {
-            position: relative;
+        .rating-container {
+            width: 100%;
+            max-width: 600px;
+            background: rgba(21, 39, 63, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #8A6A3E;
+            margin-top: 20px;
+        }
+
+        .rating-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .rating-table th {
+            background: rgba(138, 106, 62, 0.3);
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #8A6A3E;
+        }
+
+        .rating-table td {
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #8A6A3E;
+        }
+
+        .leader-badge {
+            color: #FFD700;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        .bb-code-container {
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        #ratingBBCode {
+            width: 100%;
+            height: 150px;
+            background: rgba(21, 39, 63, 0.8);
+            color: white;
+            border: 1px solid #8A6A3E;
+            border-radius: 5px;
+            padding: 10px;
+            font-family: monospace;
+            resize: vertical;
+        }
+
+        .copy-btn {
+            background: #5D4C3A;
+            color: #E8D8C0;
+            padding: 8px 15px;
+            border: 1px solid #8A6A3E;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-family: "Sofia Sans Extra Condensed", sans-serif;
+        }
+
+        .copy-btn:hover {
+            background: #6B5A48;
+        }
+
+        .category-icon {
+            width: 16px;
+            height: 16px;
+            vertical-align: middle;
+            margin-right: 3px;
+        }
+
+        .blind-simple-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .blind-simple-table th {
+            background: rgba(138, 106, 62, 0.3);
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #8A6A3E;
+        }
+
+        .blind-simple-table td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #8A6A3E;
+        }
+
+        .blind-simple-table .position {
+            width: 50px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .blind-simple-table .name {
+            text-align: left;
+            padding-left: 15px;
+        }
+
+        .name-with-icons {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px;
+        }
+
+        .participant-name {
+            flex: 1;
+        }
+
+        .category-icons-container {
+            display: flex;
+            gap: 5px;
+        }
+
+        .rating-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+            gap: 10px;
+        }
+
+        .toggle-btn {
+            padding: 8px 16px;
+            background: #5D4C3A;
+            color: #E8D8C0;
+            border: 1px solid #8A6A3E;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: "Sofia Sans Extra Condensed", sans-serif;
+            transition: all 0.3s;
+        }
+
+        .toggle-btn.active {
+            background: #8A6A3E;
+            color: white;
+        }
+
+        .toggle-btn:hover {
+            background: #6B5A48;
+        }
+
+        .medium-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .medium-table th {
+            background: rgba(138, 106, 62, 0.3);
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #8A6A3E;
+        }
+
+        .medium-table td {
+            padding: 8px;
+            border: 1px solid #8A6A3E;
+        }
+
+        .medium-table .position {
+            width: 50px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .medium-table .name {
+            text-align: left;
+            padding-left: 15px;
+        }
+
+        .medium-table .score {
+            text-align: center;
+        }
+
+        .score-with-icons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .score-value {
+            font-weight: bold;
         }
     </style>
 </head>
@@ -631,11 +804,8 @@
                 </div>
 
                 <div class="card purple">
-                    <h2>Вид участника (%)</h2>
+                    <h2>Рейтинг участников</h2>
                     <div class="participant-view-container">
-                        <div id="participantImageContainer">
-                            <img id="participantImage" src="https://s2.radikal.cloud/2025/10/15/Airbrush-BG-CHANGER-17604826441147118454f6a44b93d.png" alt="Божество">
-                        </div>
                         <div id="participantAngerContainer">
                             <div class="anger-bar-participant">
                                 <div id="mercyFillParticipant" class="mercy-fill-participant" style="width: 0%;">
@@ -644,6 +814,69 @@
                             </div>
                         </div>
                         <button class="screenshot-btn" onclick="captureAngerBar()">Сохранить шкалу как PNG</button>
+                        
+                        <div class="rating-container">
+                            <h3 style="color: #C9A86A; text-align: center; margin-bottom: 15px;">Таблица рейтинга</h3>
+                            
+                            <div class="rating-toggle">
+                                <button class="toggle-btn active" onclick="switchRatingType('blind')">Слепой рейтинг</button>
+                                <button class="toggle-btn" onclick="switchRatingType('medium')">Средний рейтинг</button>
+                                <button class="toggle-btn" onclick="switchRatingType('detailed')">Детальный рейтинг</button>
+                            </div>
+                            
+                            <!-- Слепой рейтинг -->
+                            <div id="blindRating" class="rating-table-container">
+                                <table class="blind-simple-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="position" style="width: 60px;">#</th>
+                                            <th class="name">Участник</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="blindRatingTableBody">
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <!-- Средний рейтинг -->
+                            <div id="mediumRating" class="rating-table-container" style="display: none;">
+                                <table class="medium-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="position" style="width: 60px;">#</th>
+                                            <th class="name">Участник</th>
+                                            <th class="score">Общий счет</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="mediumRatingTableBody">
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <!-- Детальный рейтинг -->
+                            <div id="detailedRating" class="rating-table-container" style="display: none;">
+                                <table class="rating-table" id="ratingTable">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 60px;">#</th>
+                                            <th style="width: 150px;">Участник</th>
+                                            <th style="width: 100px;">Общий счёт</th>
+                                            <th style="width: 100px;">Зов Друида</th>
+                                            <th style="width: 120px;">Тропа Рогатого Бога</th>
+                                            <th style="width: 100px;">Пир теней</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="ratingTableBody">
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="bb-code-container">
+                                <h4 style="color: #C9A86A; margin-bottom: 10px;">BB-код для форума:</h4>
+                                <textarea id="ratingBBCode" readonly></textarea>
+                                <button class="copy-btn" onclick="copyBBCode()">Копировать BB-код</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -705,6 +938,69 @@
     </div>
 
     <script>
+        // Категории заданий - ОБНОВЛЕННЫЕ ССЫЛКИ ДЛЯ СЛЕПОГО РЕЙТИНГА
+        const categories = {
+            'druid': {
+                name: 'Зов Друида',
+                icon: 'https://radika1.link/2025/10/30/category1.5f2095aaa5bb86bb3580b05a889722cfa628.png'
+            },
+            'horned': {
+                name: 'Тропа Рогатого Бога', 
+                icon: 'https://s2.radikal.cloud/2025/10/30/category3.013889044053f209aac60bc3a4f21ee400ea.png'
+            },
+            'shadows': {
+                name: 'Пир теней',
+                icon: 'https://s1.radikal.cloud/2025/10/30/category2.061ef8c50536e607b8ff9ccc8610feac569c.png'
+            }
+        };
+
+        // Стандартные задания по категориям
+        const defaultTasks = [
+            // Зов Друида
+            { id: 1, name: 'Зов Друида (легкое)', mercy: 2, category: 'druid' },
+            { id: 2, name: 'Зов Друида (среднее)', mercy: 4, category: 'druid' },
+            { id: 3, name: 'Зов Друида (сложное)', mercy: 6, category: 'druid' },
+            
+            // Тропа Рогатого Бога
+            { id: 4, name: 'Тропа Рогатого Бога (легкое)', mercy: 2, category: 'horned' },
+            { id: 5, name: 'Тропа Рогатого Бога (среднее)', mercy: 4, category: 'horned' },
+            { id: 6, name: 'Тропа Рогатого Бога (сложное)', mercy: 6, category: 'horned' },
+            
+            // Пир теней
+            { id: 7, name: 'Пир теней (легкое)', mercy: 2, category: 'shadows' },
+            { id: 8, name: 'Пир теней (среднее)', mercy: 4, category: 'shadows' },
+            { id: 9, name: 'Пир теней (сложное)', mercy: 6, category: 'shadows' }
+        ];
+
+        // Текущий тип рейтинга
+        let currentRatingType = 'blind';
+
+        function switchRatingType(type) {
+            currentRatingType = type;
+            
+            // Обновляем активные кнопки
+            document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+            if (type === 'blind') {
+                document.querySelector('.toggle-btn:nth-child(1)').classList.add('active');
+                document.getElementById('blindRating').style.display = 'block';
+                document.getElementById('mediumRating').style.display = 'none';
+                document.getElementById('detailedRating').style.display = 'none';
+            } else if (type === 'medium') {
+                document.querySelector('.toggle-btn:nth-child(2)').classList.add('active');
+                document.getElementById('blindRating').style.display = 'none';
+                document.getElementById('mediumRating').style.display = 'block';
+                document.getElementById('detailedRating').style.display = 'none';
+            } else {
+                document.querySelector('.toggle-btn:nth-child(3)').classList.add('active');
+                document.getElementById('blindRating').style.display = 'none';
+                document.getElementById('mediumRating').style.display = 'none';
+                document.getElementById('detailedRating').style.display = 'block';
+            }
+            
+            // Обновляем BB-код в зависимости от типа
+            updateRatingTable();
+        }
+
         function saveData() {
             const data = { participants, tasks, journal };
             localStorage.setItem('questData', JSON.stringify(data));
@@ -717,6 +1013,14 @@
                 participants = data.participants || participants;
                 tasks = data.tasks || tasks;
                 journal = data.journal || journal;
+                
+                // Если задач нет, добавляем стандартные
+                if (tasks.length === 0) {
+                    tasks = [...defaultTasks];
+                }
+            } else {
+                // При первом запуске добавляем стандартные задания
+                tasks = [...defaultTasks];
             }
         }
 
@@ -754,6 +1058,7 @@
                         renderParticipants();
                         renderTasks();
                         renderJournal();
+                        updateRatingTable();
                         alert('Данные импортированы успешно!');
                     } else {
                         alert('Неверный формат файла');
@@ -851,42 +1156,20 @@
         function clearAllData() {
             if (confirm('Вы уверены? Все данные будут удалены навсегда!')) {
                 localStorage.removeItem('questData');
-                participants = [
-                    { id: 1, name: 'Артем' },
-                    { id: 2, name: 'Виктория' },
-                    { id: 3, name: 'Максим' }
-                ];
-                tasks = [
-                    { id: 1, name: 'Найти артефакт проклятия', mercy: 15 },
-                    { id: 2, name: 'Решить загадку духа', mercy: 10 },
-                    { id: 3, name: 'Помочь потерянной душе', mercy: 25 },
-                    { id: 4, name: 'Расшифровать рунический текст', mercy: 20 }
-                ];
+                participants = [];
+                tasks = [...defaultTasks];
                 journal = [];
                 renderParticipants();
                 renderTasks();
                 renderJournal();
+                updateRatingTable();
                 alert('Данные восстановлены к начальному состоянию');
             }
         }
 
-        let participants = [
-            { id: 1, name: 'Артем' },
-            { id: 2, name: 'Виктория' },
-            { id: 3, name: 'Максим' }
-        ];
-
-        let tasks = [
-            { id: 1, name: 'Найти артефакт проклятия', mercy: 15 },
-            { id: 2, name: 'Решить загадку духа', mercy: 10 },
-            { id: 3, name: 'Помочь потерянной душе', mercy: 25 },
-            { id: 4, name: 'Расшифровать рунический текст', mercy: 20 }
-        ];
-
-        let journal = [
-            { id: 1, date: '2025-10-15', participantId: 1, taskId: 2, mercy: 10 },
-            { id: 2, date: '2025-10-15', participantId: 2, taskId: 1, mercy: 15 }
-        ];
+        let participants = [];
+        let tasks = [];
+        let journal = [];
 
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -939,6 +1222,275 @@
             document.getElementById('chartCurrentAnger').textContent = currentAnger;
         }
 
+        function updateRatingTable() {
+            // Собираем статистику по участникам
+            const participantStats = {};
+            
+            participants.forEach(participant => {
+                participantStats[participant.id] = {
+                    name: participant.name,
+                    total: 0,
+                    byCategory: {
+                        'druid': 0,
+                        'horned': 0,
+                        'shadows': 0
+                    }
+                };
+            });
+            
+            // Заполняем статистику из журнала
+            journal.forEach(entry => {
+                const participant = participantStats[entry.participantId];
+                const task = tasks.find(t => t.id === entry.taskId);
+                
+                if (participant && task) {
+                    participant.total += entry.mercy;
+                    
+                    if (task.category && participant.byCategory[task.category] !== undefined) {
+                        participant.byCategory[task.category] += entry.mercy;
+                    }
+                }
+            });
+            
+            // Находим лидеров в каждой категории
+            const categoryLeaders = {
+                'druid': { score: 0, participants: [] },
+                'horned': { score: 0, participants: [] },
+                'shadows': { score: 0, participants: [] }
+            };
+            
+            Object.values(participantStats).forEach(stat => {
+                Object.keys(categoryLeaders).forEach(category => {
+                    if (stat.byCategory[category] > categoryLeaders[category].score) {
+                        categoryLeaders[category].score = stat.byCategory[category];
+                        categoryLeaders[category].participants = [stat.name];
+                    } else if (stat.byCategory[category] === categoryLeaders[category].score && stat.byCategory[category] > 0) {
+                        categoryLeaders[category].participants.push(stat.name);
+                    }
+                });
+            });
+            
+            // Сортируем участников по общему счету
+            const sortedStats = Object.values(participantStats).sort((a, b) => b.total - a.total);
+            
+            // Обновляем слепой рейтинг
+            updateBlindRating(sortedStats, categoryLeaders);
+            
+            // Обновляем средний рейтинг
+            updateMediumRating(sortedStats, categoryLeaders);
+            
+            // Обновляем детальный рейтинг
+            updateDetailedRating(sortedStats, categoryLeaders);
+            
+            // Генерируем BB-код в зависимости от текущего типа
+            generateBBCode(sortedStats, categoryLeaders);
+        }
+
+        function updateBlindRating(sortedStats, categoryLeaders) {
+            const tableBody = document.getElementById('blindRatingTableBody');
+            
+            tableBody.innerHTML = sortedStats.map((stat, index) => {
+                const position = index + 1;
+                
+                // Определяем, в каких категориях участник является лидером
+                const leaderCategories = [];
+                if (categoryLeaders.druid.participants.includes(stat.name)) {
+                    leaderCategories.push('druid');
+                }
+                if (categoryLeaders.horned.participants.includes(stat.name)) {
+                    leaderCategories.push('horned');
+                }
+                if (categoryLeaders.shadows.participants.includes(stat.name)) {
+                    leaderCategories.push('shadows');
+                }
+                
+                // Создаем HTML для значков категорий
+                const categoryIconsHtml = leaderCategories.map(cat => 
+                    `<img src="${categories[cat].icon}" alt="${categories[cat].name}" class="category-icon">`
+                ).join('');
+                
+                return `
+                    <tr>
+                        <td class="position">${position}</td>
+                        <td class="name">
+                            <div class="name-with-icons">
+                                <span class="participant-name">${stat.name}</span>
+                                <div class="category-icons-container">
+                                    ${categoryIconsHtml}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function updateMediumRating(sortedStats, categoryLeaders) {
+            const tableBody = document.getElementById('mediumRatingTableBody');
+            
+            tableBody.innerHTML = sortedStats.map((stat, index) => {
+                const position = index + 1;
+                
+                // Определяем, в каких категориях участник является лидером
+                const leaderCategories = [];
+                if (categoryLeaders.druid.participants.includes(stat.name)) {
+                    leaderCategories.push('druid');
+                }
+                if (categoryLeaders.horned.participants.includes(stat.name)) {
+                    leaderCategories.push('horned');
+                }
+                if (categoryLeaders.shadows.participants.includes(stat.name)) {
+                    leaderCategories.push('shadows');
+                }
+                
+                // Создаем HTML для значков категорий
+                const categoryIconsHtml = leaderCategories.map(cat => 
+                    `<img src="${categories[cat].icon}" alt="${categories[cat].name}" class="category-icon">`
+                ).join('');
+                
+                return `
+                    <tr>
+                        <td class="position">${position}</td>
+                        <td class="name">${stat.name}</td>
+                        <td class="score">
+                            <div class="score-with-icons">
+                                <span class="score-value">${stat.total}</span>
+                                ${categoryIconsHtml}
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function updateDetailedRating(sortedStats, categoryLeaders) {
+            const tableBody = document.getElementById('ratingTableBody');
+            
+            tableBody.innerHTML = sortedStats.map((stat, index) => {
+                const position = index + 1;
+                
+                // Определяем лидеров для каждой категории
+                const isDruidLeader = categoryLeaders.druid.participants.includes(stat.name);
+                const isHornedLeader = categoryLeaders.horned.participants.includes(stat.name);
+                const isShadowsLeader = categoryLeaders.shadows.participants.includes(stat.name);
+                
+                return `
+                    <tr>
+                        <td>${position}</td>
+                        <td>${stat.name}</td>
+                        <td><strong>${stat.total}</strong></td>
+                        <td>${stat.byCategory.druid} ${isDruidLeader ? '<span class="leader-badge">★</span>' : ''}</td>
+                        <td>${stat.byCategory.horned} ${isHornedLeader ? '<span class="leader-badge">★</span>' : ''}</td>
+                        <td>${stat.byCategory.shadows} ${isShadowsLeader ? '<span class="leader-badge">★</span>' : ''}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function generateBBCode(sortedStats, categoryLeaders) {
+            const bbCodeTextarea = document.getElementById('ratingBBCode');
+            
+            if (currentRatingType === 'blind') {
+                // BB-код для слепого рейтинга
+                let bbCode = `[table]
+[tr][td][width=25][b]#[/b][/width][/td][td][width=250][b]Участник[/b][/width][/td][/tr]`;
+                
+                sortedStats.forEach((stat, index) => {
+                    const position = index + 1;
+                    
+                    // Определяем, в каких категориях участник является лидером
+                    const leaderCategories = [];
+                    if (categoryLeaders.druid.participants.includes(stat.name)) {
+                        leaderCategories.push('druid');
+                    }
+                    if (categoryLeaders.horned.participants.includes(stat.name)) {
+                        leaderCategories.push('horned');
+                    }
+                    if (categoryLeaders.shadows.participants.includes(stat.name)) {
+                        leaderCategories.push('shadows');
+                    }
+                    
+                    // Создаем BB-код для значков категорий
+                    const categoryIconsBb = leaderCategories.map(cat => 
+                        ` [img]${categories[cat].icon}[/img]`
+                    ).join('');
+                    
+                    bbCode += `
+[tr][td][width=25]${position}[/width][/td][td][width=250]${stat.name}${categoryIconsBb}[/width][/td][/tr]`;
+                });
+                
+                bbCode += `
+[/table]`;
+                bbCodeTextarea.value = bbCode;
+            } else if (currentRatingType === 'medium') {
+                // BB-код для среднего рейтинга - ИСПРАВЛЕНО ЦЕНТРИРОВАНИЕ
+                let bbCode = `[table]
+[tr][td][width=25][b]#[/b][/width][/td][td][width=250][b]Участник[/b][/width][/td][td][center][width=100][b]Общий счет[/b][/width][/center][/td][/tr]`;
+                
+                sortedStats.forEach((stat, index) => {
+                    const position = index + 1;
+                    
+                    // Определяем, в каких категориях участник является лидером
+                    const leaderCategories = [];
+                    if (categoryLeaders.druid.participants.includes(stat.name)) {
+                        leaderCategories.push('druid');
+                    }
+                    if (categoryLeaders.horned.participants.includes(stat.name)) {
+                        leaderCategories.push('horned');
+                    }
+                    if (categoryLeaders.shadows.participants.includes(stat.name)) {
+                        leaderCategories.push('shadows');
+                    }
+                    
+                    // Создаем BB-код для значков категорий
+                    const categoryIconsBb = leaderCategories.map(cat => 
+                        ` [img]${categories[cat].icon}[/img]`
+                    ).join('');
+                    
+                    bbCode += `
+[tr][td][width=25]${position}[/width][/td][td][width=250]${stat.name}[/width][/td][td][center][width=100]${stat.total}${categoryIconsBb}[/center][/td][/tr]`;
+                });
+                
+                bbCode += `
+[/table]`;
+                bbCodeTextarea.value = bbCode;
+            } else {
+                // BB-код для детального рейтинга
+                let bbCode = `[table]
+[tr][td][width=25][b]#[/b][/width][/td][td][width=150][b]Участник[/b][/width][/td][td][center][width=100][b]Общий счет[/b][/width][/center][/td]
+[td][center][width=30][img]https://ulashyl.github.io/quest/static/media/category1.5f2095aaa5bb86bb3580.png[/img][/width][/center][/td]
+[td][center][width=30][img]https://radika1.link/2025/10/30/category3.013889044053f209aac6fec1a3235026ba78.png[/img][/width][/center][/td]
+[td][center][width=30][img]https://radika1.link/2025/10/30/category2.061ef8c50536e607b8ff3cb6a6172820981c.png[/img][/width][/center][/td][/tr]`;
+                
+                sortedStats.forEach((stat, index) => {
+                    const position = index + 1;
+                    
+                    // Определяем лидеров для каждой категории
+                    const isDruidLeader = categoryLeaders.druid.participants.includes(stat.name);
+                    const isHornedLeader = categoryLeaders.horned.participants.includes(stat.name);
+                    const isShadowsLeader = categoryLeaders.shadows.participants.includes(stat.name);
+                    
+                    bbCode += `
+[tr][td][width=25]${position}[/width][/td][td][width=150]${stat.name}[/width][/td]
+[td][width=100][center]${stat.total}[/center][/width][/td]
+[td][width=50][center]${stat.byCategory.druid}${isDruidLeader ? ' ★' : ''}[/center][/width][/td]
+[td][width=50][center]${stat.byCategory.horned}${isHornedLeader ? ' ★' : ''}[/center][/width][/td]
+[td][width=50][center]${stat.byCategory.shadows}${isShadowsLeader ? ' ★' : ''}[/center][/width][/td][/tr]`;
+                });
+                
+                bbCode += `
+[/table]`;
+                bbCodeTextarea.value = bbCode;
+            }
+        }
+
+        function copyBBCode() {
+            const bbCodeTextarea = document.getElementById('ratingBBCode');
+            bbCodeTextarea.select();
+            document.execCommand('copy');
+            alert('BB-код скопирован в буфер обмена!');
+        }
+
         function renderParticipants() {
             const list = document.getElementById('participantsList');
             list.innerHTML = participants.map(p => `
@@ -949,16 +1501,22 @@
             `).join('');
 
             updateParticipantSelect();
+            updateRatingTable();
         }
 
         function renderTasks() {
             const list = document.getElementById('tasksList');
-            list.innerHTML = tasks.map(t => `
+            list.innerHTML = tasks.map(t => {
+                const category = categories[t.category];
+                const iconHtml = category ? `<img src="${category.icon}" alt="${category.name}" class="category-icon">` : '';
+                const categoryName = category ? category.name : 'Без категории';
+                
+                return `
                 <li>
-                    <span><strong>#${t.id}</strong> ${t.name} <span style="color: #6B8E23; margin-left: 10px;">Милость: +${t.mercy}</span></span>
+                    <span>${iconHtml} <strong>#${t.id}</strong> ${t.name} <span style="color: #6B8E23; margin-left: 10px;">Милость: +${t.mercy}</span> <span style="color: #aaa; font-size: 0.9em;">(${categoryName})</span></span>
                     <button class="delete-btn" onclick="deleteTask(${t.id})">Удалить</button>
                 </li>
-            `).join('');
+            `}).join('');
 
             updateTaskSelect();
         }
@@ -968,11 +1526,14 @@
             table.innerHTML = journal.map(j => {
                 const participant = participants.find(p => p.id === j.participantId);
                 const task = tasks.find(t => t.id === j.taskId);
+                const category = task && categories[task.category];
+                const iconHtml = category ? `<img src="${category.icon}" alt="${category.name}" class="category-icon">` : '';
+                
                 return `
                     <tr>
                         <td>${j.date}</td>
                         <td>${participant ? participant.name : 'Неизвестно'}</td>
-                        <td>${task ? task.name : 'Неизвестно'}</td>
+                        <td>${iconHtml} ${task ? task.name : 'Неизвестно'}</td>
                         <td style="text-align: center; color: #6B8E23;">+${j.mercy}</td>
                         <td style="text-align: center;">
                             <button class="delete-btn" onclick="deleteJournalEntry(${j.id})">Удалить</button>
@@ -982,6 +1543,7 @@
             }).join('');
 
             updateDashboard();
+            updateRatingTable();
         }
 
         function updateParticipantSelect() {
@@ -993,13 +1555,17 @@
         function updateTaskSelect() {
             const select = document.getElementById('journalTask');
             select.innerHTML = '<option value="">Выберите задание...</option>' + 
-                tasks.map(t => `<option value="${t.id}">${t.name} (+${t.mercy})</option>`).join('');
+                tasks.map(t => {
+                    const category = categories[t.category];
+                    const categoryName = category ? category.name : 'Без категории';
+                    return `<option value="${t.id}">${t.name} (+${t.mercy}) - ${categoryName}</option>`;
+                }).join('');
         }
 
         function addParticipant() {
             const name = document.getElementById('newParticipantName').value.trim();
             if (name) {
-                const id = Math.max(...participants.map(p => p.id), 0) + 1;
+                const id = participants.length > 0 ? Math.max(...participants.map(p => p.id)) + 1 : 1;
                 participants.push({ id, name });
                 document.getElementById('newParticipantName').value = '';
                 renderParticipants();
@@ -1020,7 +1586,7 @@
             const name = document.getElementById('newTaskName').value.trim();
             const mercy = parseInt(document.getElementById('newTaskMercy').value) || 0;
             if (name && mercy > 0) {
-                const id = Math.max(...tasks.map(t => t.id), 0) + 1;
+                const id = tasks.length > 0 ? Math.max(...tasks.map(t => t.id)) + 1 : 1;
                 tasks.push({ id, name, mercy });
                 document.getElementById('newTaskName').value = '';
                 document.getElementById('newTaskMercy').value = '';
@@ -1041,7 +1607,7 @@
             
             if (participantId && taskId) {
                 const task = tasks.find(t => t.id === taskId);
-                const id = Math.max(...journal.map(j => j.id), 0) + 1;
+                const id = journal.length > 0 ? Math.max(...journal.map(j => j.id)) + 1 : 1;
                 const today = new Date().toISOString().split('T')[0];
                 journal.push({
                     id,
@@ -1068,6 +1634,8 @@
             renderParticipants();
             renderTasks();
             renderJournal();
+            // Устанавливаем слепой рейтинг по умолчанию
+            switchRatingType('blind');
         });
     </script>
 </body>
