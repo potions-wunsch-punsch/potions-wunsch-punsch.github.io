@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ravenclaw - Квест "Гнев Кернунна"</title>
-    <link rel="icon" type="image/x-icon" href="faviconTT.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
@@ -34,7 +33,7 @@
             background-size: auto;
             background-repeat: repeat;
             border-bottom: 0px double #8A6A3E;
-            padding: 30px 20px;
+            padding: 20px;
             text-align: center;
             position: relative;
         }
@@ -58,45 +57,45 @@
 
         h1 {
             font-family: 'Permanent Marker', cursive;
-            font-size: 3.5em;
+            font-size: 2.8em;
             color: #8A6A3E;
             text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9);
-            margin-bottom: 10px;
-            letter-spacing: 3px;
+            margin-bottom: 5px;
+            letter-spacing: 2px;
         }
 
         .subtitle {
             font-family: "Sofia Sans Extra Condensed", sans-serif;
             color: #C9A86A;
-            font-size: 1.8em;
+            font-size: 1.5em;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
 
         .container {
             max-width: 1400px;
-            margin: 20px auto;
+            margin: 15px auto;
             padding: 0 15px;
         }
 
         .tabs {
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 8px;
+            margin-bottom: 15px;
             flex-wrap: wrap;
             background: rgba(21, 39, 63, 0.9);
-            padding: 10px;
-            border-radius: 8px;
+            padding: 8px;
+            border-radius: 6px;
             border: 2px double #8A6A3E;
         }
 
         button.tab-btn {
-            padding: 12px 20px;
+            padding: 10px 16px;
             background: #5D4C3A;
             color: #E8D8C0;
             border: 1px solid #8A6A3E;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 1.1em;
+            font-size: 1em;
             font-weight: 500;
             transition: all 0.3s;
             font-family: "Sofia Sans Extra Condensed", sans-serif;
@@ -104,7 +103,7 @@
 
         button.tab-btn:hover {
             background: #6B5A48;
-            transform: translateY(-2px);
+            transform: translateY(-1px);
         }
 
         button.tab-btn.active {
@@ -124,9 +123,9 @@
         .card {
             background: rgba(21, 39, 63, 0.95);
             border: 2px double #8A6A3E;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
         }
 
         .card.purple {
@@ -139,8 +138,8 @@
 
         h2 {
             color: #C9A86A;
-            margin-bottom: 15px;
-            font-size: 1.8em;
+            margin-bottom: 12px;
+            font-size: 1.6em;
             font-family: "Sofia Sans Extra Condensed", sans-serif;
             font-weight: 600;
         }
@@ -155,15 +154,16 @@
 
         input[type="text"],
         input[type="number"],
+        input[type="date"],
         select {
             width: 100%;
-            padding: 10px;
-            margin: 8px 0;
+            padding: 8px;
+            margin: 6px 0;
             background: rgba(21, 39, 63, 0.8);
             border: 1px solid #8A6A3E;
-            border-radius: 5px;
+            border-radius: 4px;
             color: #fff;
-            font-size: 1em;
+            font-size: 0.95em;
             font-family: "Sofia Sans Extra Condensed", sans-serif;
         }
 
@@ -175,30 +175,30 @@
         button.add-btn {
             background: #5D4C3A;
             color: #E8D8C0;
-            padding: 10px 20px;
+            padding: 8px 16px;
             border: 1px solid #8A6A3E;
             border-radius: 4px;
             cursor: pointer;
             font-weight: 500;
             transition: all 0.3s;
-            margin-top: 10px;
+            margin-top: 8px;
             font-family: "Sofia Sans Extra Condensed", sans-serif;
-            font-size: 1.1em;
+            font-size: 1em;
         }
 
         button.add-btn:hover {
             background: #6B5A48;
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
 
         button.delete-btn {
             background: #5D4C3A;
             color: #E8D8C0;
-            padding: 6px 12px;
+            padding: 5px 10px;
             border: 1px solid #8A6A3E;
-            border-radius: 4px;
+            border-radius: 3px;
             cursor: pointer;
-            font-size: 0.9em;
+            font-size: 0.85em;
             transition: all 0.3s;
             font-family: "Sofia Sans Extra Condensed", sans-serif;
         }
@@ -213,9 +213,9 @@
 
         .item-list li {
             background: rgba(21, 39, 63, 0.6);
-            padding: 12px;
-            margin: 8px 0;
-            border-radius: 5px;
+            padding: 10px;
+            margin: 6px 0;
+            border-radius: 4px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -233,12 +233,12 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 15px;
+            margin-top: 12px;
         }
 
         th {
             background: #15273F;
-            padding: 12px;
+            padding: 10px;
             text-align: left;
             border-bottom: 2px solid #8A6A3E;
             color: #C9A86A;
@@ -252,7 +252,7 @@
         }
 
         td {
-            padding: 12px;
+            padding: 10px;
             border-bottom: 1px solid #8A6A3E;
             background: #15273F;
             font-family: "Sofia Sans Extra Condensed", sans-serif;
@@ -265,8 +265,8 @@
         .dashboard-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
+            gap: 15px;
+            margin-bottom: 15px;
         }
 
         @media (max-width: 1024px) {
@@ -277,17 +277,17 @@
 
         .anger-display {
             background: rgba(21, 39, 63, 0.8);
-            padding: 15px;
-            border-radius: 8px;
-            margin: 10px 0;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 8px 0;
             border: 1px solid #8A6A3E;
         }
 
         .anger-stat {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
-            font-size: 1.05em;
+            padding: 6px 0;
+            font-size: 1em;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
@@ -309,7 +309,7 @@
         }
 
         .anger-value {
-            font-size: 1.3em !important;
+            font-size: 1.2em !important;
             color: #B22222 !important;
         }
 
@@ -327,11 +327,11 @@
 
         .anger-bar {
             width: 100%;
-            height: 30px;
+            height: 25px;
             background: linear-gradient(90deg, #8B4513 0%, #A0522D 50%, #CD5C5C 100%);
-            border-radius: 15px;
+            border-radius: 12px;
             overflow: hidden;
-            margin: 15px 0;
+            margin: 12px 0;
             box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
             position: relative;
         }
@@ -348,40 +348,41 @@
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
             position: absolute;
             right: 0;
+            font-size: 0.9em;
         }
 
         .chart-container {
             background: rgba(21, 39, 63, 0.6);
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 12px;
             border: 1px solid #8A6A3E;
         }
 
         .chart-bar {
             display: flex;
             align-items: center;
-            margin: 12px 0;
-            gap: 10px;
+            margin: 10px 0;
+            gap: 8px;
         }
 
         .chart-label {
-            min-width: 150px;
+            min-width: 120px;
             text-align: right;
-            font-size: 0.95em;
+            font-size: 0.9em;
         }
 
         .chart-bar-visual {
             flex: 1;
-            height: 25px;
+            height: 20px;
             background: linear-gradient(90deg, #5D4C3A 0%, #8A6A3E 100%);
-            border-radius: 5px;
+            border-radius: 4px;
             display: flex;
             align-items: center;
-            padding-left: 10px;
+            padding-left: 8px;
             color: white;
             font-weight: bold;
-            font-size: 0.9em;
+            font-size: 0.85em;
         }
 
         .chart-bar-visual.mercy {
@@ -392,26 +393,33 @@
             background: linear-gradient(90deg, #8B4513 0%, #CD5C5C 100%);
         }
 
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin: 12px 0;
+        }
+
         .grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin: 15px 0;
+            gap: 12px;
+            margin: 12px 0;
         }
 
         @media (max-width: 768px) {
-            .grid-2 {
+            .grid-3, .grid-2 {
                 grid-template-columns: 1fr;
             }
         }
 
         .status-badge {
             display: inline-block;
-            padding: 8px 15px;
-            border-radius: 20px;
+            padding: 6px 12px;
+            border-radius: 15px;
             font-weight: bold;
-            margin-top: 10px;
-            font-size: 0.95em;
+            margin-top: 8px;
+            font-size: 0.9em;
         }
 
         .status-badge.rage {
@@ -436,8 +444,8 @@
 
         .input-group {
             display: flex;
-            gap: 10px;
-            margin: 15px 0;
+            gap: 8px;
+            margin: 12px 0;
         }
 
         .input-group input,
@@ -451,14 +459,14 @@
 
         .export-import-section {
             background: rgba(21, 39, 63, 0.8);
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 15px 0;
             border: 2px double #8A6A3E;
         }
 
         .export-import-section button {
-            margin: 5px;
+            margin: 4px;
         }
 
         #importFile {
@@ -469,25 +477,25 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
         }
 
         #participantAngerContainer {
             width: 100%;
-            max-width: 600px;
+            max-width: 500px;
         }
 
         .anger-bar-participant {
             width: 100%;
-            height: 50px;
+            height: 40px;
             background: linear-gradient(90deg, #8B4513 0%, #A0522D 35%, #CD5C5C 65%, #D2691E 100%);
-            border-radius: 15px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 15px;
+            margin-top: 12px;
             position: relative;
             border: 2px solid #8A6A3E;
         }
@@ -506,7 +514,7 @@
         .mercy-fill-participant span {
             color: white;
             font-weight: bold;
-            font-size: 1.5em;
+            font-size: 1.2em;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             z-index: 10;
             position: absolute;
@@ -517,47 +525,47 @@
         .screenshot-btn {
             background: linear-gradient(135deg, #5D4C3A 0%, #8A6A3E 100%);
             color: #E8D8C0;
-            padding: 12px 30px;
+            padding: 10px 20px;
             border: 1px solid #8A6A3E;
             border-radius: 4px;
             cursor: pointer;
             font-weight: 500;
-            font-size: 1.1em;
+            font-size: 1em;
             transition: all 0.3s;
-            margin-top: 20px;
+            margin-top: 15px;
             font-family: "Sofia Sans Extra Condensed", sans-serif;
         }
 
         .screenshot-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(93, 76, 58, 0.6);
+            transform: scale(1.03);
+            box-shadow: 0 4px 15px rgba(93, 76, 58, 0.6);
         }
 
         .rating-container {
             width: 100%;
-            max-width: 600px;
+            max-width: 500px;
             background: rgba(21, 39, 63, 0.8);
-            padding: 15px;
-            border-radius: 8px;
+            padding: 12px;
+            border-radius: 6px;
             border: 1px solid #8A6A3E;
-            margin-top: 20px;
+            margin-top: 15px;
         }
 
         .rating-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
+            margin-top: 8px;
         }
 
         .rating-table th {
             background: rgba(138, 106, 62, 0.3);
-            padding: 8px;
+            padding: 6px;
             text-align: center;
             border: 1px solid #8A6A3E;
         }
 
         .rating-table td {
-            padding: 8px;
+            padding: 6px;
             text-align: center;
             border: 1px solid #8A6A3E;
         }
@@ -565,35 +573,37 @@
         .leader-badge {
             color: #FFD700;
             font-weight: bold;
-            margin-left: 5px;
+            margin-left: 3px;
         }
 
         .bb-code-container {
             width: 100%;
-            margin-top: 15px;
+            margin-top: 12px;
         }
 
         #ratingBBCode {
             width: 100%;
-            height: 150px;
+            height: 120px;
             background: rgba(21, 39, 63, 0.8);
             color: white;
             border: 1px solid #8A6A3E;
-            border-radius: 5px;
-            padding: 10px;
+            border-radius: 4px;
+            padding: 8px;
             font-family: monospace;
             resize: vertical;
+            font-size: 0.9em;
         }
 
         .copy-btn {
             background: #5D4C3A;
             color: #E8D8C0;
-            padding: 8px 15px;
+            padding: 6px 12px;
             border: 1px solid #8A6A3E;
-            border-radius: 4px;
+            border-radius: 3px;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 8px;
             font-family: "Sofia Sans Extra Condensed", sans-serif;
+            font-size: 0.9em;
         }
 
         .copy-btn:hover {
@@ -601,47 +611,47 @@
         }
 
         .category-icon {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             vertical-align: middle;
-            margin-right: 3px;
+            margin-right: 2px;
         }
 
         .blind-simple-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
+            margin-top: 8px;
         }
 
         .blind-simple-table th {
             background: rgba(138, 106, 62, 0.3);
-            padding: 8px;
+            padding: 6px;
             text-align: center;
             border: 1px solid #8A6A3E;
         }
 
         .blind-simple-table td {
-            padding: 8px;
+            padding: 6px;
             text-align: left;
             border: 1px solid #8A6A3E;
         }
 
         .blind-simple-table .position {
-            width: 50px;
+            width: 40px;
             text-align: center;
             font-weight: bold;
         }
 
         .blind-simple-table .name {
             text-align: left;
-            padding-left: 15px;
+            padding-left: 10px;
         }
 
         .name-with-icons {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 10px;
+            padding: 0 8px;
         }
 
         .participant-name {
@@ -650,25 +660,26 @@
 
         .category-icons-container {
             display: flex;
-            gap: 5px;
+            gap: 3px;
         }
 
         .rating-toggle {
             display: flex;
             justify-content: center;
-            margin-bottom: 15px;
-            gap: 10px;
+            margin-bottom: 12px;
+            gap: 8px;
         }
 
         .toggle-btn {
-            padding: 8px 16px;
+            padding: 6px 12px;
             background: #5D4C3A;
             color: #E8D8C0;
             border: 1px solid #8A6A3E;
-            border-radius: 4px;
+            border-radius: 3px;
             cursor: pointer;
             font-family: "Sofia Sans Extra Condensed", sans-serif;
             transition: all 0.3s;
+            font-size: 0.9em;
         }
 
         .toggle-btn.active {
@@ -683,30 +694,30 @@
         .medium-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
+            margin-top: 8px;
         }
 
         .medium-table th {
             background: rgba(138, 106, 62, 0.3);
-            padding: 8px;
+            padding: 6px;
             text-align: center;
             border: 1px solid #8A6A3E;
         }
 
         .medium-table td {
-            padding: 8px;
+            padding: 6px;
             border: 1px solid #8A6A3E;
         }
 
         .medium-table .position {
-            width: 50px;
+            width: 40px;
             text-align: center;
             font-weight: bold;
         }
 
         .medium-table .name {
             text-align: left;
-            padding-left: 15px;
+            padding-left: 10px;
         }
 
         .medium-table .score {
@@ -717,11 +728,189 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
+            gap: 3px;
         }
 
         .score-value {
             font-weight: bold;
+        }
+
+        .tasks-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        .task-category {
+            margin-bottom: 15px;
+        }
+
+        .task-category h3 {
+            color: #C9A86A;
+            margin-bottom: 8px;
+            padding-bottom: 3px;
+            border-bottom: 1px solid #8A6A3E;
+            font-size: 1.2em;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px;
+            background: rgba(21, 39, 63, 0.6);
+            border-radius: 4px;
+            margin-bottom: 4px;
+            border-left: 3px solid #8A6A3E;
+        }
+
+        .task-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .task-checkbox {
+            width: 18px;
+            height: 18px;
+        }
+
+        .task-mercy-input {
+            width: 50px;
+            padding: 4px;
+            background: rgba(21, 39, 63, 0.8);
+            border: 1px solid #8A6A3E;
+            border-radius: 3px;
+            color: white;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        /* КОМПАКТНОЕ ПОЛЕ ДАТЫ В ЖУРНАЛЕ */
+        .date-selector {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .date-selector label {
+            color: #C9A86A;
+            font-weight: bold;
+            min-width: 50px;
+        }
+
+        .date-selector input {
+            width: 150px;
+        }
+
+        .participant-selector {
+            margin-bottom: 15px;
+        }
+
+        .tasks-container {
+            display: none;
+        }
+
+        .tasks-container.active {
+            display: block;
+        }
+
+        /* НОВЫЕ СТИЛИ ДЛЯ КОМПАКТНОГО ЖУРНАЛА */
+        .journal-categories {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 1024px) {
+            .journal-categories {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .journal-category {
+            background: rgba(21, 39, 63, 0.7);
+            border-radius: 6px;
+            padding: 10px;
+            border: 1px solid #8A6A3E;
+        }
+
+        .journal-category h3 {
+            color: #C9A86A;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+            text-align: center;
+            border-bottom: 1px solid #8A6A3E;
+            padding-bottom: 5px;
+        }
+
+        /* ОБНОВЛЕННЫЕ СТИЛИ ДЛЯ УЧАСТНИКОВ В ТРИ СТОЛБЦА */
+        .participants-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        @media (max-width: 1024px) {
+            .participants-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .participants-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .participant-card {
+            background: rgba(21, 39, 63, 0.6);
+            border-radius: 5px;
+            padding: 10px;
+            border-left: 3px solid #8A6A3E;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .participant-info {
+            flex: 1;
+        }
+
+        .participant-name {
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+
+        .participant-date {
+            font-size: 0.8em;
+            color: #aaa;
+        }
+
+        .participant-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .compact-btn {
+            padding: 4px 8px;
+            font-size: 0.8em;
+        }
+
+        /* СТИЛЬ ДЛЯ СООБЩЕНИЯ О НАЧАЛЕ КВЕСТА */
+        .started-later-message {
+            background: rgba(193, 66, 66, 0.3);
+            border: 1px solid #B22222;
+            border-radius: 5px;
+            padding: 15px;
+            text-align: center;
+            margin: 15px 0;
+            color: #E8D8C0;
         }
     </style>
 </head>
@@ -735,17 +924,16 @@
         <div class="tabs">
             <button class="tab-btn active" onclick="switchTab('dashboard')">Dashboard</button>
             <button class="tab-btn" onclick="switchTab('participants')">Участники</button>
-            <button class="tab-btn" onclick="switchTab('tasks')">Задания</button>
             <button class="tab-btn" onclick="switchTab('journal')">Журнал</button>
             <button class="tab-btn" style="margin-left: auto; background: #5a4a4a;" onclick="toggleExportImport()">Экспорт/Импорт</button>
         </div>
 
         <div id="exportImportPanel" class="export-import-section" style="display: none;">
-            <h3 style="color: #C9A86A; margin-bottom: 15px;">Экспорт и импорт данных</h3>
+            <h3 style="color: #C9A86A; margin-bottom: 12px; font-size: 1.3em;">Экспорт и импорт данных</h3>
             <button class="add-btn" onclick="exportData()">Экспортировать (JSON)</button>
             <button class="add-btn" onclick="document.getElementById('importFile').click()">Импортировать (JSON)</button>
             <input type="file" id="importFile" accept=".json" onchange="importData(event)">
-            <p style="color: #aaa; margin-top: 10px; font-size: 0.9em;">Экспортируйте данные в файл JSON и импортируйте их на другом компьютере или браузере</p>
+            <p style="color: #aaa; margin-top: 8px; font-size: 0.85em;">Экспортируйте данные в файл JSON и импортируйте их на другом компьютере или браузере</p>
         </div>
 
         <div id="dashboard" class="tab-content active">
@@ -767,9 +955,9 @@
                         </div>
                         <div class="anger-stat">
                             <span>Гнев Кернунна:</span>
-                            <span id="initialAnger" style="color: #B22222; font-size: 1.2em;">468</span>
+                            <span id="initialAnger" style="color: #B22222; font-size: 1.1em;">468</span>
                         </div>
-                        <div style="border-top: 2px solid rgba(255, 255, 255, 0.2); margin: 10px 0;"></div>
+                        <div style="border-top: 2px solid rgba(255, 255, 255, 0.2); margin: 8px 0;"></div>
                         <div class="anger-stat">
                             <span>Суммарная милость:</span>
                             <span id="totalMercy" style="color: #6B8E23;">0</span>
@@ -783,11 +971,11 @@
                         <div id="mercyFillLeader" class="anger-fill" style="width: 0%;">0 / 468</div>
                     </div>
 
-                    <h3 style="margin-top: 20px; color: #C9A86A;">Диаграмма (баллы)</h3>
+                    <h3 style="margin-top: 15px; color: #C9A86A; font-size: 1.3em;">Диаграмма (баллы)</h3>
                     <div class="chart-container">
                         <div class="chart-bar">
                             <div class="chart-label">Базовый гнев</div>
-                            <div class="chart-bar-visual anger" id="chartBaseAnger" style="width: 150px;">468</div>
+                            <div class="chart-bar-visual anger" id="chartBaseAnger" style="width: 120px;">468</div>
                         </div>
                         <div class="chart-bar">
                             <div class="chart-label">Гнев участников</div>
@@ -797,9 +985,9 @@
                             <div class="chart-label">Милость</div>
                             <div class="chart-bar-visual mercy" id="chartMercy" style="width: 0px;">0</div>
                         </div>
-                        <div class="chart-bar" style="margin-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.2); padding-top: 15px;">
+                        <div class="chart-bar" style="margin-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.2); padding-top: 12px;">
                             <div class="chart-label">Оставшийся гнев</div>
-                            <div class="chart-bar-visual anger" id="chartCurrentAnger" style="width: 150px;">468</div>
+                            <div class="chart-bar-visual anger" id="chartCurrentAnger" style="width: 120px;">468</div>
                         </div>
                     </div>
                 </div>
@@ -817,12 +1005,12 @@
                         <button class="screenshot-btn" onclick="captureAngerBar()">Сохранить шкалу как PNG</button>
                         
                         <div class="rating-container">
-                            <h3 style="color: #C9A86A; text-align: center; margin-bottom: 15px;">Таблица рейтинга</h3>
+                            <h3 style="color: #C9A86A; text-align: center; margin-bottom: 12px; font-size: 1.3em;">Таблица рейтинга</h3>
                             
                             <div class="rating-toggle">
-                                <button class="toggle-btn active" onclick="switchRatingType('blind')">Слепой рейтинг</button>
-                                <button class="toggle-btn" onclick="switchRatingType('medium')">Средний рейтинг</button>
-                                <button class="toggle-btn" onclick="switchRatingType('detailed')">Детальный рейтинг</button>
+                                <button class="toggle-btn active" onclick="switchRatingType('blind')">Слепой</button>
+                                <button class="toggle-btn" onclick="switchRatingType('medium')">Средний</button>
+                                <button class="toggle-btn" onclick="switchRatingType('detailed')">Детальный</button>
                             </div>
                             
                             <!-- Слепой рейтинг -->
@@ -830,7 +1018,7 @@
                                 <table class="blind-simple-table">
                                     <thead>
                                         <tr>
-                                            <th class="position" style="width: 60px;">#</th>
+                                            <th class="position" style="width: 50px;">#</th>
                                             <th class="name">Участник</th>
                                         </tr>
                                     </thead>
@@ -844,7 +1032,7 @@
                                 <table class="medium-table">
                                     <thead>
                                         <tr>
-                                            <th class="position" style="width: 60px;">#</th>
+                                            <th class="position" style="width: 50px;">#</th>
                                             <th class="name">Участник</th>
                                             <th class="score">Общий счет</th>
                                         </tr>
@@ -859,12 +1047,12 @@
                                 <table class="rating-table" id="ratingTable">
                                     <thead>
                                         <tr>
-                                            <th style="width: 60px;">#</th>
-                                            <th style="width: 150px;">Участник</th>
-                                            <th style="width: 100px;">Общий счёт</th>
-                                            <th style="width: 100px;">Зов Друида</th>
-                                            <th style="width: 120px;">Тропа Рогатого Бога</th>
-                                            <th style="width: 100px;">Пир теней</th>
+                                            <th style="width: 50px;">#</th>
+                                            <th style="width: 130px;">Участник</th>
+                                            <th style="width: 80px;">Общий счёт</th>
+                                            <th style="width: 80px;">Зов Друида</th>
+                                            <th style="width: 100px;">Тропа Рогатого Бога</th>
+                                            <th style="width: 80px;">Пир теней</th>
                                         </tr>
                                     </thead>
                                     <tbody id="ratingTableBody">
@@ -873,7 +1061,7 @@
                             </div>
                             
                             <div class="bb-code-container">
-                                <h4 style="color: #C9A86A; margin-bottom: 10px;">BB-код для форума:</h4>
+                                <h4 style="color: #C9A86A; margin-bottom: 8px; font-size: 1.1em;">BB-код для форума:</h4>
                                 <textarea id="ratingBBCode" readonly></textarea>
                                 <button class="copy-btn" onclick="copyBBCode()">Копировать BB-код</button>
                             </div>
@@ -890,84 +1078,95 @@
                     <input type="text" id="newParticipantName" placeholder="Имя нового участника...">
                     <button class="add-btn" onclick="addParticipant()">Добавить</button>
                 </div>
-                <ul class="item-list" id="participantsList"></ul>
-            </div>
-        </div>
-
-        <div id="tasks" class="tab-content">
-            <div class="card">
-                <h2>Список заданий</h2>
-                <div class="grid-2">
-                    <input type="text" id="newTaskName" placeholder="Название задания...">
-                    <input type="number" id="newTaskMercy" placeholder="Очки милости..." min="1">
+                
+                <div class="participants-grid" id="participantsGrid">
+                    <!-- Участники будут добавлены динамически -->
                 </div>
-                <button class="add-btn" onclick="addTask()">Добавить задание</button>
-                <ul class="item-list" id="tasksList"></ul>
             </div>
         </div>
 
         <div id="journal" class="tab-content">
             <div class="card green">
                 <h2>Журнал выполненных заданий</h2>
-                <div class="grid-2">
-                    <div>
-                        <label style="font-size: 0.9em; color: #aaa;">Выберите участника:</label>
-                        <select id="journalParticipant"></select>
-                    </div>
-                    <div>
-                        <label style="font-size: 0.9em; color: #aaa;">Выберите задание:</label>
-                        <select id="journalTask"></select>
-                    </div>
+                
+                <div class="date-selector">
+                    <label for="journalDate">Дата:</label>
+                    <input type="date" id="journalDate">
+                    <button class="add-btn" onclick="loadJournalForDate()">Загрузить</button>
                 </div>
-                <button class="add-btn" onclick="addJournalEntry()" style="background: #6B8E23;">Добавить запись</button>
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Дата</th>
-                            <th>Участник</th>
-                            <th>Задание</th>
-                            <th>Очки милости</th>
-                            <th>Действие</th>
-                        </tr>
-                    </thead>
-                    <tbody id="journalTable">
-                    </tbody>
-                </table>
+                
+                <div class="participant-selector">
+                    <label for="journalParticipantSelect">Участник:</label>
+                    <select id="journalParticipantSelect" onchange="showTasksForParticipant()">
+                        <option value="">Выберите участника...</option>
+                    </select>
+                </div>
+                
+                <div id="tasksContainer" class="tasks-container">
+                    <!-- Сообщение о начале квеста позже будет добавлено динамически -->
+                    <div id="startedLaterMessage" class="started-later-message" style="display: none;"></div>
+                    
+                    <h3 style="color: #C9A86A; margin-bottom: 12px; font-size: 1.3em;">Задания для выбранного участника</h3>
+                    
+                    <div class="journal-categories">
+                        <div class="journal-category">
+                            <h3>Зов Друида</h3>
+                            <div id="druidTasks" class="tasks-grid">
+                                <!-- Задания будут добавлены динамически -->
+                            </div>
+                        </div>
+                        
+                        <div class="journal-category">
+                            <h3>Тропа Рогатого Бога</h3>
+                            <div id="hornedTasks" class="tasks-grid">
+                                <!-- Задания будут добавлены динамически -->
+                            </div>
+                        </div>
+                        
+                        <div class="journal-category">
+                            <h3>Пир теней</h3>
+                            <div id="shadowsTasks" class="tasks-grid">
+                                <!-- Задания будут добавлены динамически -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="add-btn" onclick="saveJournalEntries()" style="background: #6B8E23;">Сохранить изменения</button>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Категории заданий - ОБНОВЛЕННЫЕ ССЫЛКИ
+        // Категории заданий
         const categories = {
             'druid': {
                 name: 'Зов Друида',
-                icon: 'https://ulashyl.github.io/quest/static/media/category1.5f2095aaa5bb86bb3580.png'
+                icon: 'https://radika1.link/2025/10/30/category1.5f2095aaa5bb86bb3580b05a889722cfa628.png'
             },
             'horned': {
                 name: 'Тропа Рогатого Бога', 
-                icon: 'https://ulashyl.github.io/quest/static/media/category3.013889044053f209aac6.png'
+                icon: 'https://s2.radikal.cloud/2025/10/30/category3.013889044053f209aac60bc3a4f21ee400ea.png'
             },
             'shadows': {
                 name: 'Пир теней',
-                icon: 'https://ulashyl.github.io/quest/static/media/category2.061ef8c50536e607b8ff.png'
+                icon: 'https://s1.radikal.cloud/2025/10/30/category2.061ef8c50536e607b8ff9ccc8610feac569c.png'
             }
         };
 
-        // Стандартные задания по категориям
+        // Стандартные задания по категориям (УДАЛЕНЫ ШТРАФНЫЕ ЗАДАНИЯ)
         const defaultTasks = [
             // Зов Друида
             { id: 1, name: 'Зов Друида (легкое)', mercy: 2, category: 'druid' },
             { id: 2, name: 'Зов Друида (среднее)', mercy: 4, category: 'druid' },
             { id: 3, name: 'Зов Друида (сложное)', mercy: 6, category: 'druid' },
             
-            // Тропа Рогатого Бога
+            // Тропа Рогатого Бога (удалены штрафные задания)
             { id: 4, name: 'Тропа Рогатого Бога (легкое)', mercy: 2, category: 'horned' },
             { id: 5, name: 'Тропа Рогатого Бога (среднее)', mercy: 4, category: 'horned' },
             { id: 6, name: 'Тропа Рогатого Бога (сложное)', mercy: 6, category: 'horned' },
             
-            // Пир теней
+            // Пир теней (удалены штрафные задания)
             { id: 7, name: 'Пир теней (легкое)', mercy: 2, category: 'shadows' },
             { id: 8, name: 'Пир теней (среднее)', mercy: 4, category: 'shadows' },
             { id: 9, name: 'Пир теней (сложное)', mercy: 6, category: 'shadows' }
@@ -975,6 +1174,12 @@
 
         // Текущий тип рейтинга
         let currentRatingType = 'blind';
+        
+        // Текущая выбранная дата в журнале
+        let currentJournalDate = '';
+        
+        // Текущий выбранный участник в журнале
+        let currentJournalParticipant = null;
 
         function switchRatingType(type) {
             currentRatingType = type;
@@ -1018,7 +1223,21 @@
                 // Если задач нет, добавляем стандартные
                 if (tasks.length === 0) {
                     tasks = [...defaultTasks];
+                } else {
+                    // Удаляем штрафные задания из существующей базы
+                    tasks = tasks.filter(task => 
+                        task.name !== 'Тропа Рогатого Бога (штраф)' && 
+                        task.name !== 'Пир теней (штраф)'
+                    );
                 }
+                
+                // Исправляем дату только для участников без даты (старые данные)
+                const targetDate = '2024-10-31';
+                participants.forEach(participant => {
+                    if (!participant.addedDate) {
+                        participant.addedDate = targetDate;
+                    }
+                });
             } else {
                 // При первом запуске добавляем стандартные задания
                 tasks = [...defaultTasks];
@@ -1055,10 +1274,15 @@
                         participants = data.participants;
                         tasks = data.tasks;
                         journal = data.journal;
+                        
+                        // Удаляем штрафные задания при импорте
+                        tasks = tasks.filter(task => 
+                            task.name !== 'Тропа Рогатого Бога (штраф)' && 
+                            task.name !== 'Пир теней (штраф)'
+                        );
+                        
                         saveData();
                         renderParticipants();
-                        renderTasks();
-                        renderJournal();
                         updateRatingTable();
                         alert('Данные импортированы успешно!');
                     } else {
@@ -1087,9 +1311,9 @@
                 const ctx = canvas.getContext('2d');
                 
                 // Размеры шкалы
-                const barWidth = 600;
-                const barHeight = 80;
-                const padding = 20;
+                const barWidth = 500;
+                const barHeight = 60;
+                const padding = 15;
                 
                 canvas.width = barWidth + padding * 2;
                 canvas.height = barHeight + padding * 2;
@@ -1110,7 +1334,7 @@
                 // Рисуем фоновую шкалу (гнев)
                 ctx.fillStyle = gradient;
                 ctx.beginPath();
-                ctx.roundRect(x, y, barWidth, barHeight, 15);
+                ctx.roundRect(x, y, barWidth, barHeight, 12);
                 ctx.fill();
                 
                 // Рисуем заполняющую часть (милость)
@@ -1125,16 +1349,16 @@
                 
                 ctx.fillStyle = mercyGradient;
                 ctx.beginPath();
-                ctx.roundRect(x, y, fillWidth, barHeight, 15);
+                ctx.roundRect(x, y, fillWidth, barHeight, 12);
                 ctx.fill();
                 
                 // Рисуем текст с процентом
                 ctx.fillStyle = 'white';
-                ctx.font = 'bold 48px "Sofia Sans Extra Condensed"';
+                ctx.font = 'bold 36px "Sofia Sans Extra Condensed"';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
                 ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
-                ctx.shadowBlur = 6;
+                ctx.shadowBlur = 4;
                 ctx.shadowOffsetX = 2;
                 ctx.shadowOffsetY = 2;
                 ctx.fillText(percent, canvas.width / 2, canvas.height / 2);
@@ -1161,8 +1385,6 @@
                 tasks = [...defaultTasks];
                 journal = [];
                 renderParticipants();
-                renderTasks();
-                renderJournal();
                 updateRatingTable();
                 alert('Данные восстановлены к начальному состоянию');
             }
@@ -1177,6 +1399,13 @@
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
             document.getElementById(tabName).classList.add('active');
             event.target.classList.add('active');
+            
+            // При переключении на вкладку журнала устанавливаем сегодняшнюю дату
+            if (tabName === 'journal') {
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById('journalDate').value = today;
+                loadJournalForDate();
+            }
         }
 
         function updateDashboard() {
@@ -1184,7 +1413,13 @@
             const participantCount = participants.length;
             const participantAnger = participantCount * 78; // 78 за каждого участника
             const initialAnger = baseAnger + participantAnger;
-            const totalMercy = journal.reduce((sum, entry) => sum + entry.mercy, 0);
+            
+            // Считаем общую милость из журнала
+            let totalMercy = 0;
+            journal.forEach(entry => {
+                totalMercy += entry.mercy;
+            });
+            
             const currentAnger = Math.max(0, initialAnger - totalMercy);
             const mercyPercent = initialAnger === 0 ? 0 : Math.round((totalMercy / initialAnger) * 100);
 
@@ -1216,7 +1451,7 @@
             }
 
             // Обновляем диаграммы с пропорциональным отображением
-            const maxWidth = 300; // Максимальная ширина для диаграмм
+            const maxWidth = 250; // Максимальная ширина для диаграмм
             
             // Базовый гнев (468) - всегда отображается как фиксированная часть
             document.getElementById('chartBaseAnger').style.width = (baseAnger / initialAnger * maxWidth) + 'px';
@@ -1436,7 +1671,7 @@
 [/table]`;
                 bbCodeTextarea.value = bbCode;
             } else if (currentRatingType === 'medium') {
-                // BB-код для среднего рейтинга - ИСПРАВЛЕНО ЦЕНТРИРОВАНИЕ
+                // BB-код для среднего рейтинга
                 let bbCode = `[table]
 [tr][td][width=25][b]#[/b][/width][/td][td][width=250][b]Участник[/b][/width][/td][td][center][width=100][b]Общий счет[/b][/width][/center][/td][/tr]`;
                 
@@ -1504,83 +1739,36 @@
             alert('BB-код скопирован в буфер обмена!');
         }
 
+        // ОБНОВЛЕННАЯ ФУНКЦИЯ ДЛЯ ОТОБРАЖЕНИЯ УЧАСТНИКОВ
         function renderParticipants() {
-            const list = document.getElementById('participantsList');
-            list.innerHTML = participants.map(p => `
-                <li class="purple-item">
-                    <span><strong>#${p.id}</strong> ${p.name}</span>
-                    <button class="delete-btn" onclick="deleteParticipant(${p.id})">Удалить</button>
-                </li>
+            const grid = document.getElementById('participantsGrid');
+            
+            grid.innerHTML = participants.map(p => `
+                <div class="participant-card">
+                    <div class="participant-info">
+                        <div class="participant-name">${p.name}</div>
+                        <div class="participant-date">Добавлен: ${p.addedDate || 'Неизвестно'}</div>
+                    </div>
+                    <div class="participant-actions">
+                        <button class="delete-btn compact-btn" onclick="deleteParticipant(${p.id})">Удалить</button>
+                    </div>
+                </div>
             `).join('');
-
-            updateParticipantSelect();
-            updateDashboard(); // Обновляем dashboard при изменении участников
-            updateRatingTable();
-        }
-
-        function renderTasks() {
-            const list = document.getElementById('tasksList');
-            list.innerHTML = tasks.map(t => {
-                const category = categories[t.category];
-                const iconHtml = category ? `<img src="${category.icon}" alt="${category.name}" class="category-icon">` : '';
-                const categoryName = category ? category.name : 'Без категории';
-                
-                return `
-                <li>
-                    <span>${iconHtml} <strong>#${t.id}</strong> ${t.name} <span style="color: #6B8E23; margin-left: 10px;">Милость: +${t.mercy}</span> <span style="color: #aaa; font-size: 0.9em;">(${categoryName})</span></span>
-                    <button class="delete-btn" onclick="deleteTask(${t.id})">Удалить</button>
-                </li>
-            `}).join('');
-
-            updateTaskSelect();
-        }
-
-        function renderJournal() {
-            const table = document.getElementById('journalTable');
-            table.innerHTML = journal.map(j => {
-                const participant = participants.find(p => p.id === j.participantId);
-                const task = tasks.find(t => t.id === j.taskId);
-                const category = task && categories[task.category];
-                const iconHtml = category ? `<img src="${category.icon}" alt="${category.name}" class="category-icon">` : '';
-                
-                return `
-                    <tr>
-                        <td>${j.date}</td>
-                        <td>${participant ? participant.name : 'Неизвестно'}</td>
-                        <td>${iconHtml} ${task ? task.name : 'Неизвестно'}</td>
-                        <td style="text-align: center; color: #6B8E23;">+${j.mercy}</td>
-                        <td style="text-align: center;">
-                            <button class="delete-btn" onclick="deleteJournalEntry(${j.id})">Удалить</button>
-                        </td>
-                    </tr>
-                `;
-            }).join('');
 
             updateDashboard();
             updateRatingTable();
-        }
-
-        function updateParticipantSelect() {
-            const select = document.getElementById('journalParticipant');
-            select.innerHTML = '<option value="">Выберите участника...</option>' + 
-                participants.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
-        }
-
-        function updateTaskSelect() {
-            const select = document.getElementById('journalTask');
-            select.innerHTML = '<option value="">Выберите задание...</option>' + 
-                tasks.map(t => {
-                    const category = categories[t.category];
-                    const categoryName = category ? category.name : 'Без категории';
-                    return `<option value="${t.id}">${t.name} (+${t.mercy}) - ${categoryName}</option>`;
-                }).join('');
         }
 
         function addParticipant() {
             const name = document.getElementById('newParticipantName').value.trim();
             if (name) {
                 const id = participants.length > 0 ? Math.max(...participants.map(p => p.id)) + 1 : 1;
-                participants.push({ id, name });
+                const today = new Date().toISOString().split('T')[0];
+                participants.push({ 
+                    id, 
+                    name, 
+                    addedDate: today 
+                });
                 document.getElementById('newParticipantName').value = '';
                 renderParticipants();
                 saveData();
@@ -1589,66 +1777,197 @@
 
         function deleteParticipant(id) {
             participants = participants.filter(p => p.id !== id);
+            // Удаляем записи в журнале для этого участника
             journal = journal.filter(j => j.participantId !== id);
             renderParticipants();
-            renderJournal();
+            updateRatingTable();
             saveData();
         }
 
-        function addTask() {
-            const name = document.getElementById('newTaskName').value.trim();
-            const mercy = parseInt(document.getElementById('newTaskMercy').value) || 0;
-            if (name && mercy > 0) {
-                const id = tasks.length > 0 ? Math.max(...tasks.map(t => t.id)) + 1 : 1;
-                tasks.push({ id, name, mercy });
-                document.getElementById('newTaskName').value = '';
-                document.getElementById('newTaskMercy').value = '';
-                renderTasks();
-                saveData();
-            }
-        }
+        // ФУНКЦИИ ДЛЯ ЖУРНАЛА
 
-        function deleteTask(id) {
-            tasks = tasks.filter(t => t.id !== id);
-            renderTasks();
-            saveData();
-        }
-
-        function addJournalEntry() {
-            const participantId = parseInt(document.getElementById('journalParticipant').value);
-            const taskId = parseInt(document.getElementById('journalTask').value);
+        function loadJournalForDate() {
+            const dateInput = document.getElementById('journalDate');
+            currentJournalDate = dateInput.value;
             
-            if (participantId && taskId) {
-                const task = tasks.find(t => t.id === taskId);
-                const id = journal.length > 0 ? Math.max(...journal.map(j => j.id)) + 1 : 1;
-                const today = new Date().toISOString().split('T')[0];
-                journal.push({
-                    id,
-                    date: today,
-                    participantId,
-                    taskId,
-                    mercy: task.mercy
-                });
-                document.getElementById('journalParticipant').value = '';
-                document.getElementById('journalTask').value = '';
-                renderJournal();
+            if (!currentJournalDate) {
+                alert('Пожалуйста, выберите дату');
+                return;
+            }
+            
+            // Обновляем список участников для выбранной даты
+            updateJournalParticipantSelect();
+            
+            // Сбрасываем выбранного участника
+            document.getElementById('journalParticipantSelect').value = '';
+            document.getElementById('tasksContainer').classList.remove('active');
+            document.getElementById('startedLaterMessage').style.display = 'none';
+            currentJournalParticipant = null;
+        }
+
+        function updateJournalParticipantSelect() {
+            const select = document.getElementById('journalParticipantSelect');
+            select.innerHTML = '<option value="">Выберите участника...</option>';
+            
+            // Добавляем всех участников, которые были добавлены до выбранной даты или в эту дату
+            participants.forEach(p => {
+                select.innerHTML += `<option value="${p.id}">${p.name}</option>`;
+            });
+        }
+
+        function showTasksForParticipant() {
+            const participantId = parseInt(document.getElementById('journalParticipantSelect').value);
+            
+            if (!participantId) {
+                document.getElementById('tasksContainer').classList.remove('active');
+                document.getElementById('startedLaterMessage').style.display = 'none';
+                currentJournalParticipant = null;
+                return;
+            }
+            
+            const participant = participants.find(p => p.id === participantId);
+            if (!participant) {
+                return;
+            }
+            
+            // Проверяем, начал ли участник квест позже выбранной даты
+            if (currentJournalDate < participant.addedDate) {
+                document.getElementById('tasksContainer').classList.remove('active');
+                document.getElementById('startedLaterMessage').style.display = 'block';
+                document.getElementById('startedLaterMessage').innerHTML = 
+                    `<strong>${participant.name}</strong> начал проходить квест ${participant.addedDate}.<br>Выберите дату не ранее этой.`;
+                currentJournalParticipant = null;
+                return;
+            }
+            
+            currentJournalParticipant = participantId;
+            document.getElementById('tasksContainer').classList.add('active');
+            document.getElementById('startedLaterMessage').style.display = 'none';
+            
+            // Загружаем задания для выбранного участника
+            loadTasksForParticipant(participantId);
+        }
+
+        function loadTasksForParticipant(participantId) {
+            // Очищаем контейнеры с заданиями
+            document.getElementById('druidTasks').innerHTML = '';
+            document.getElementById('hornedTasks').innerHTML = '';
+            document.getElementById('shadowsTasks').innerHTML = '';
+            
+            // Получаем задания по категориям
+            const druidTasks = tasks.filter(t => t.category === 'druid');
+            const hornedTasks = tasks.filter(t => t.category === 'horned');
+            const shadowsTasks = tasks.filter(t => t.category === 'shadows');
+            
+            // Отображаем задания для каждой категории
+            renderTaskCategory('druidTasks', druidTasks, participantId);
+            renderTaskCategory('hornedTasks', hornedTasks, participantId);
+            renderTaskCategory('shadowsTasks', shadowsTasks, participantId);
+        }
+
+        function renderTaskCategory(containerId, taskList, participantId) {
+            const container = document.getElementById(containerId);
+            
+            taskList.forEach(task => {
+                // Проверяем, есть ли уже запись в журнале для этого задания, участника и даты
+                const existingEntry = journal.find(j => 
+                    j.date === currentJournalDate && 
+                    j.participantId === participantId && 
+                    j.taskId === task.id
+                );
+                
+                const isCompleted = existingEntry ? true : false;
+                const mercyValue = existingEntry ? existingEntry.mercy : task.mercy;
+                
+                const taskElement = document.createElement('div');
+                taskElement.className = 'task-item';
+                taskElement.innerHTML = `
+                    <div class="task-info">
+                        <input type="checkbox" class="task-checkbox" ${isCompleted ? 'checked' : ''} 
+                               data-task-id="${task.id}" onchange="toggleTaskCompletion(this, ${task.id}, ${participantId})">
+                        <span>${task.name}</span>
+                    </div>
+                    <input type="number" class="task-mercy-input" value="${mercyValue}" min="0" 
+                           data-task-id="${task.id}" onchange="updateTaskMercy(this, ${task.id}, ${participantId})">
+                `;
+                
+                container.appendChild(taskElement);
+            });
+        }
+
+        function toggleTaskCompletion(checkbox, taskId, participantId) {
+            const mercyInput = document.querySelector(`.task-mercy-input[data-task-id="${taskId}"]`);
+            const mercyValue = parseInt(mercyInput.value) || 0;
+            
+            if (checkbox.checked) {
+                // Добавляем запись в журнал
+                const existingIndex = journal.findIndex(j => 
+                    j.date === currentJournalDate && 
+                    j.participantId === participantId && 
+                    j.taskId === taskId
+                );
+                
+                if (existingIndex === -1) {
+                    const id = journal.length > 0 ? Math.max(...journal.map(j => j.id)) + 1 : 1;
+                    journal.push({
+                        id,
+                        date: currentJournalDate,
+                        participantId,
+                        taskId,
+                        mercy: mercyValue
+                    });
+                } else {
+                    // Обновляем существующую запись
+                    journal[existingIndex].mercy = mercyValue;
+                }
+            } else {
+                // Удаляем запись из журнала
+                journal = journal.filter(j => 
+                    !(j.date === currentJournalDate && 
+                      j.participantId === participantId && 
+                      j.taskId === taskId)
+                );
+            }
+            
+            saveData();
+            updateDashboard();
+            updateRatingTable();
+        }
+
+        function updateTaskMercy(input, taskId, participantId) {
+            const mercyValue = parseInt(input.value) || 0;
+            
+            // Находим запись в журнале
+            const existingIndex = journal.findIndex(j => 
+                j.date === currentJournalDate && 
+                j.participantId === participantId && 
+                j.taskId === taskId
+            );
+            
+            if (existingIndex !== -1) {
+                // Обновляем существующую запись
+                journal[existingIndex].mercy = mercyValue;
                 saveData();
+                updateDashboard();
+                updateRatingTable();
             }
         }
 
-        function deleteJournalEntry(id) {
-            journal = journal.filter(j => j.id !== id);
-            renderJournal();
-            saveData();
+        function saveJournalEntries() {
+            // Эта функция теперь не нужна, так как изменения сохраняются автоматически
+            // при изменении чекбоксов и полей ввода
+            alert('Все изменения уже сохранены автоматически!');
         }
 
         window.addEventListener('load', () => {
             loadData();
             renderParticipants();
-            renderTasks();
-            renderJournal();
             // Устанавливаем слепой рейтинг по умолчанию
             switchRatingType('blind');
+            
+            // Устанавливаем сегодняшнюю дату в поле выбора даты
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('journalDate').value = today;
         });
     </script>
 </body>
