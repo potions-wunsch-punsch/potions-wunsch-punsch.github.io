@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СлАдОсТь иЛи ПаКоСтЬ?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Burned&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background-image: url('background.jpg');
+            background-size: auto;
+            background-position: center;
+            background-color: #0a0a0a;
+            color: #f4e4bc;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .main-block {
+            background: linear-gradient(135deg, #1a1f4d 0%, #0d1129 100%);
+            max-width: 600px;
+            width: 100%;
+            border-radius: 20px;
+            border: 3px solid #ff6b00;
+            box-shadow: 0 0 30px rgba(255, 107, 0, 0.5), inset 0 0 50px rgba(0, 0, 0, 0.3);
+            padding: 40px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .spider-web {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120%;
+            max-width: 700px;
+            opacity: 0.8;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        h1 {
+            font-family: "Rubik Burned", system-ui;
+            font-size: 3.5em;
+            text-align: center;
+            background: linear-gradient(45deg, #ff6b00, #ff9500, #ffb700, #ff9500, #ff6b00);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(255, 107, 0, 0.5);
+            animation: gradient 3s ease infinite;
+            margin-top: 60px;
+        }
+
+        @keyframes gradient {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+        }
+
+        .pumpkin-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .pumpkin-image {
+            max-width: 250px;
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            filter: drop-shadow(0 0 15px rgba(255, 107, 0, 0.6));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-10px) scale(1.03);
+            }
+        }
+
+        .pumpkin-image:hover {
+            animation: none;
+            transform: scale(1.15) rotate(5deg);
+            filter: drop-shadow(0 0 25px rgba(255, 107, 0, 0.9));
+        }
+
+        .pumpkin-text {
+            font-size: 1.2em;
+            color: #ff9500;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
+            font-weight: bold;
+        }
+
+        /* Модальное окно */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #2a1f4d 0%, #1a1129 100%);
+            border: 3px solid #ff6b00;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 0 40px rgba(255, 107, 0, 0.7);
+            position: relative;
+            animation: modalAppear 0.3s ease;
+        }
+
+        @keyframes modalAppear {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-title {
+            font-family: "Rubik Burned", system-ui;
+            font-size: 2em;
+            color: #ff6b00;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(255, 107, 0, 0.5);
+        }
+
+        .modal-text {
+            font-size: 1.1em;
+            color: #f4e4bc;
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .close-btn {
+            background: linear-gradient(135deg, #ff6b00, #ff9500);
+            color: #1a1129;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 0, 0.6);
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.5em;
+                margin-top: 40px;
+            }
+
+            .main-block {
+                padding: 30px 20px;
+            }
+
+            .pumpkin-image {
+                max-width: 200px;
+            }
+
+            .modal-content {
+                padding: 25px;
+            }
+
+            .modal-title {
+                font-size: 1.6em;
+            }
+
+            .modal-text {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-block">
+        <img src="https://s1.radikal.cloud/2025/10/31/Pngtreecartoon-white-spider-web-border_23181261d834dd382bc328c3.png" 
+             alt="Паутина" 
+             class="spider-web">
+        
+        <div class="content">
+            <h1>СлАдОсТь иЛи ПаКоСтЬ?</h1>
+            
+            <div class="pumpkin-container">
+                <img src="https://s1.radikal.cloud/2025/10/31/20251029_1552_Pumpkin-Candy-Cauldron_simple_compose_01k8r0bcjtev2amexgtx3c2qkf46bc145a340ce1db.png" 
+                     alt="Тыква с конфетами" 
+                     class="pumpkin-image"
+                     onclick="showTask()">
+                
+                <div class="pumpkin-text">
+                    скорее нажми на тыкву,<br>чтобы взять конфетку
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-title" id="modalTitle">Пакость №13</div>
+            <div class="modal-text" id="modalText">Текст задания появится здесь</div>
+            <button class="close-btn" onclick="closeModal()">Закрыть</button>
+        </div>
+    </div>
+
+    <script>
+        const tasks = [
+            "Придите в каморку сказки и расскажите не сказку а научный доклад.",
+            "Леденцовая комната. Добавить во все леденцовые сиропы вместо сахара соль и перец (по вкусу).",
+            "В небольшой гостиной первокурсников составить правдоподобное объявление о продаже места декана.",
+            "Комната с книжными полками. Заменить все книги на глиняные таблички или другой информационный носитель",
+            "Перо Ровены. Предложить самые Злодейские Статьи, которые никто никогда не напечатает.",
+            "Модельер. Полностью изменить внешний вид спортивной формы ЛаФы, особенно постараться над образом капитана.",
+            "Редизайнить радио-рубку - тотальное обновление.",
+            "Записать/написать Дис на Сэра Шуша.",
+            "Принести подборку книжных антисоветов и разрекламировать их так, чтобы ЗАХОТЕЛОСЬ.",
+            "Кинотеатр: написать пошаговую инструкцию \"Как сорвать кино-показ\"",
+            "Театр. Придите в книгу отзывов и предложений, отметьте главу театра и распишите ей фабулу трёх-кнатовой оперы.",
+            "Оставьте в Новостной факультета фейк-ньюз.",
+            "Ограбьте музей Истории когтеврана и надёжно это спрячьте.",
+            "Перепишите Официальный Гимн Когтеврана.",
+            "Преврати гостиную Когтеврана в Арт-объект или в действующую площадку гигантской инсталляцию.",
+            "Разузнать и рассказать про ключики и тёмные подкопы к сердцу преподавателя.",
+            "Обустроить на чердаке логово Тайного Общества.",
+            "Сделать ритуал (без нарушений правил школы) на призыв Жуткого Нечто",
+            "Организовать в саду Доску Почёта сорняков",
+            "Выкрасть кровать у любого из обитателей башни",
+            "Поменять табличку на двери/переселить кого-то",
+            "Превратить комнату в цитатник",
+            "Превратить комнату в обитель Сумасшедшего Гения",
+            "Преобразите любой кабинет так, будто это кабинет по другой дисциплине."
+        ];
+
+        function getRandomNumber(min, max) {
+            const array = new Uint32Array(1);
+            crypto.getRandomValues(array);
+            return Math.floor((array[0] / (0xffffffff + 1)) * (max - min + 1)) + min;
+        }
+
+        function showTask() {
+            const randomTaskIndex = getRandomNumber(0, tasks.length - 1);
+            const randomNumber = getRandomNumber(1, 666);
+            
+            document.getElementById('modalTitle').textContent = `Пакость №${randomNumber}`;
+            document.getElementById('modalText').textContent = tasks[randomTaskIndex];
+            document.getElementById('modalOverlay').classList.add('active');
+        }
+
+        function closeModal(event) {
+            if (!event || event.target.id === 'modalOverlay') {
+                document.getElementById('modalOverlay').classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>
