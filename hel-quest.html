@@ -762,12 +762,12 @@
                             <span id="participantCount">0</span>
                         </div>
                         <div class="anger-stat">
-                            <span>Привнесенный гнев:</span>
-                            <span id="participantAnger">78</span>
+                            <span>Гнев от участников (×78):</span>
+                            <span id="participantAnger">0</span>
                         </div>
                         <div class="anger-stat">
                             <span>Гнев Кернунна:</span>
-                            <span id="initialAnger" style="color: #B22222; font-size: 1.2em;">546</span>
+                            <span id="initialAnger" style="color: #B22222; font-size: 1.2em;">468</span>
                         </div>
                         <div style="border-top: 2px solid rgba(255, 255, 255, 0.2); margin: 10px 0;"></div>
                         <div class="anger-stat">
@@ -776,22 +776,22 @@
                         </div>
                         <div class="anger-stat">
                             <span>Оставшийся гнев:</span>
-                            <span id="currentAnger" class="anger-value high">546</span>
+                            <span id="currentAnger" class="anger-value high">468</span>
                         </div>
                     </div>
                     <div class="anger-bar">
-                        <div id="mercyFillLeader" class="anger-fill" style="width: 0%;">0 / 546</div>
+                        <div id="mercyFillLeader" class="anger-fill" style="width: 0%;">0 / 468</div>
                     </div>
 
                     <h3 style="margin-top: 20px; color: #C9A86A;">Диаграмма (баллы)</h3>
                     <div class="chart-container">
                         <div class="chart-bar">
                             <div class="chart-label">Базовый гнев</div>
-                            <div class="chart-bar-visual anger" style="width: 150px;">468</div>
+                            <div class="chart-bar-visual anger" id="chartBaseAnger" style="width: 150px;">468</div>
                         </div>
                         <div class="chart-bar">
-                            <div class="chart-label">Привнесенный гнев</div>
-                            <div class="chart-bar-visual anger" id="chartParticipantAnger" style="width: 78px;">78</div>
+                            <div class="chart-label">Гнев участников</div>
+                            <div class="chart-bar-visual anger" id="chartParticipantAnger" style="width: 0px;">0</div>
                         </div>
                         <div class="chart-bar">
                             <div class="chart-label">Милость</div>
@@ -799,7 +799,7 @@
                         </div>
                         <div class="chart-bar" style="margin-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.2); padding-top: 15px;">
                             <div class="chart-label">Оставшийся гнев</div>
-                            <div class="chart-bar-visual anger" id="chartCurrentAnger" style="width: 228px;">546</div>
+                            <div class="chart-bar-visual anger" id="chartCurrentAnger" style="width: 150px;">468</div>
                         </div>
                     </div>
                 </div>
@@ -1182,7 +1182,7 @@
         function updateDashboard() {
             const baseAnger = 468;
             const participantCount = participants.length;
-            const participantAnger = 78; // Фиксированный привнесенный гнев
+            const participantAnger = participantCount * 78; // 78 за каждого участника
             const initialAnger = baseAnger + participantAnger;
             const totalMercy = journal.reduce((sum, entry) => sum + entry.mercy, 0);
             const currentAnger = Math.max(0, initialAnger - totalMercy);
@@ -1215,12 +1215,23 @@
                 angerValue.classList.add('low');
             }
 
-            // Обновляем диаграммы
-            document.getElementById('chartParticipantAnger').style.width = '78px';
+            // Обновляем диаграммы с пропорциональным отображением
+            const maxWidth = 300; // Максимальная ширина для диаграмм
+            
+            // Базовый гнев (468) - всегда отображается как фиксированная часть
+            document.getElementById('chartBaseAnger').style.width = (baseAnger / initialAnger * maxWidth) + 'px';
+            document.getElementById('chartBaseAnger').textContent = baseAnger;
+            
+            // Гнев участников
+            document.getElementById('chartParticipantAnger').style.width = (participantAnger / initialAnger * maxWidth) + 'px';
             document.getElementById('chartParticipantAnger').textContent = participantAnger;
-            document.getElementById('chartMercy').style.width = (totalMercy / initialAnger * 300) + 'px';
+            
+            // Милость
+            document.getElementById('chartMercy').style.width = (totalMercy / initialAnger * maxWidth) + 'px';
             document.getElementById('chartMercy').textContent = totalMercy;
-            document.getElementById('chartCurrentAnger').style.width = (currentAnger / initialAnger * 300) + 'px';
+            
+            // Оставшийся гнев
+            document.getElementById('chartCurrentAnger').style.width = (currentAnger / initialAnger * maxWidth) + 'px';
             document.getElementById('chartCurrentAnger').textContent = currentAnger;
         }
 
@@ -1503,6 +1514,7 @@
             `).join('');
 
             updateParticipantSelect();
+            updateDashboard(); // Обновляем dashboard при изменении участников
             updateRatingTable();
         }
 
@@ -1571,7 +1583,6 @@
                 participants.push({ id, name });
                 document.getElementById('newParticipantName').value = '';
                 renderParticipants();
-                updateDashboard();
                 saveData();
             }
         }
