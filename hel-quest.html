@@ -207,6 +207,23 @@
             background: #6B5A48;
         }
 
+        .edit-btn {
+            background: #8A6A3E;
+            color: #E8D8C0;
+            padding: 5px 10px;
+            border: 1px solid #8A6A3E;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: all 0.3s;
+            font-family: "Sofia Sans Extra Condensed", sans-serif;
+            margin-right: 5px;
+        }
+
+        .edit-btn:hover {
+            background: #9B7A4E;
+        }
+
         .item-list {
             list-style: none;
         }
@@ -765,6 +782,16 @@
             border-left: 3px solid #8A6A3E;
         }
 
+        .task-item.completed {
+            background: rgba(139, 69, 19, 0.4);
+            border-left-color: #8B4513;
+        }
+
+        .task-item.skipped {
+            background: rgba(139, 0, 0, 0.3);
+            border-left-color: #B22222;
+        }
+
         .task-info {
             display: flex;
             align-items: center;
@@ -776,6 +803,14 @@
             height: 18px;
         }
 
+        .task-skip-checkbox {
+            width: 18px;
+            height: 18px;
+            accent-color: #B22222;
+            border: 2px solid #B22222;
+            border-radius: 3px;
+        }
+
         .task-mercy-input {
             width: 50px;
             padding: 4px;
@@ -785,6 +820,30 @@
             color: white;
             text-align: center;
             font-size: 0.9em;
+        }
+
+        /* Стили для подписей чекбоксов */
+        .checkbox-labels {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 8px;
+            padding: 0 8px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9em;
+            color: #C9A86A;
+        }
+
+        .checkbox-label.completed {
+            color: #8B4513;
+        }
+
+        .checkbox-label.skipped {
+            color: #B22222;
         }
 
         /* КОМПАКТНОЕ ПОЛЕ ДАТЫ В ЖУРНАЛЕ */
@@ -848,12 +907,18 @@
             padding-bottom: 5px;
         }
 
-        /* ОБНОВЛЕННЫЕ СТИЛИ ДЛЯ УЧАСТНИКОВ В ТРИ СТОЛБЦА */
+        /* ОБНОВЛЕННЫЕ СТИЛИ ДЛЯ УЧАСТНИКОВ В ЧЕТЫРЕ СТОЛБЦА */
         .participants-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
             gap: 10px;
             margin-top: 12px;
+        }
+
+        @media (max-width: 1200px) {
+            .participants-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
         }
 
         @media (max-width: 1024px) {
@@ -912,6 +977,52 @@
             margin: 15px 0;
             color: #E8D8C0;
         }
+
+        /* СТИЛЬ ДЛЯ РЕДАКТИРОВАНИЯ ДАТЫ УЧАСТНИКА */
+        .date-edit-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        .date-edit-input {
+            width: 120px;
+            padding: 4px;
+            font-size: 0.8em;
+        }
+
+        .date-edit-buttons {
+            display: flex;
+            gap: 3px;
+        }
+
+        /* Стили для добавления бонусных заданий */
+        .bonus-task-form {
+            background: rgba(21, 39, 63, 0.8);
+            padding: 12px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border: 1px solid #8A6A3E;
+        }
+
+        .bonus-task-form h3 {
+            color: #C9A86A;
+            margin-bottom: 12px;
+            font-size: 1.3em;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .form-row input, .form-row select {
+            flex: 1;
+            min-width: 150px;
+        }
     </style>
 </head>
 <body>
@@ -925,6 +1036,7 @@
             <button class="tab-btn active" onclick="switchTab('dashboard')">Dashboard</button>
             <button class="tab-btn" onclick="switchTab('participants')">Участники</button>
             <button class="tab-btn" onclick="switchTab('journal')">Журнал</button>
+            <button class="tab-btn" onclick="switchTab('tasks')">Задания</button>
             <button class="tab-btn" style="margin-left: auto; background: #5a4a4a;" onclick="toggleExportImport()">Экспорт/Импорт</button>
         </div>
 
@@ -1108,6 +1220,15 @@
                     
                     <h3 style="color: #C9A86A; margin-bottom: 12px; font-size: 1.3em;">Задания для выбранного участника</h3>
                     
+                    <div class="checkbox-labels">
+                        <div class="checkbox-label completed">
+                            <span>✓ Выполнено</span>
+                        </div>
+                        <div class="checkbox-label skipped">
+                            <span>✗ Незабронировано</span>
+                        </div>
+                    </div>
+                    
                     <div class="journal-categories">
                         <div class="journal-category">
                             <h3>Зов Друида</h3>
@@ -1132,6 +1253,31 @@
                     </div>
                     
                     <button class="add-btn" onclick="saveJournalEntries()" style="background: #6B8E23;">Сохранить изменения</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="tasks" class="tab-content">
+            <div class="card">
+                <h2>Управление заданиями</h2>
+                
+                <div class="bonus-task-form">
+                    <h3>Добавить бонусное задание</h3>
+                    <div class="form-row">
+                        <input type="text" id="bonusTaskName" placeholder="Название задания...">
+                        <select id="bonusTaskCategory">
+                            <option value="druid">Зов Друида</option>
+                            <option value="horned">Тропа Рогатого Бога</option>
+                            <option value="shadows">Пир теней</option>
+                        </select>
+                        <input type="number" id="bonusTaskMercy" placeholder="Баллы милости" min="1" value="2">
+                        <button class="add-btn" onclick="addBonusTask()">Добавить задание</button>
+                    </div>
+                </div>
+
+                <h3 style="color: #C9A86A; margin-top: 20px;">Список всех заданий</h3>
+                <div class="tasks-grid" id="allTasksList">
+                    <!-- Все задания будут добавлены динамически -->
                 </div>
             </div>
         </div>
@@ -1180,31 +1326,32 @@
         
         // Текущий выбранный участник в журнале
         let currentJournalParticipant = null;
+        
+        // ID участника, у которого редактируется дата
+        let editingParticipantId = null;
 
-        function switchRatingType(type) {
-            currentRatingType = type;
+        // Инициализация участников и задач
+        let participants = [];
+        let tasks = [];
+        let journal = [];
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
             
-            // Обновляем активные кнопки
-            document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
-            if (type === 'blind') {
-                document.querySelector('.toggle-btn:nth-child(1)').classList.add('active');
-                document.getElementById('blindRating').style.display = 'block';
-                document.getElementById('mediumRating').style.display = 'none';
-                document.getElementById('detailedRating').style.display = 'none';
-            } else if (type === 'medium') {
-                document.querySelector('.toggle-btn:nth-child(2)').classList.add('active');
-                document.getElementById('blindRating').style.display = 'none';
-                document.getElementById('mediumRating').style.display = 'block';
-                document.getElementById('detailedRating').style.display = 'none';
-            } else {
-                document.querySelector('.toggle-btn:nth-child(3)').classList.add('active');
-                document.getElementById('blindRating').style.display = 'none';
-                document.getElementById('mediumRating').style.display = 'none';
-                document.getElementById('detailedRating').style.display = 'block';
+            // При переключении на вкладку журнала устанавливаем сегодняшнюю дату
+            if (tabName === 'journal') {
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById('journalDate').value = today;
+                loadJournalForDate();
             }
             
-            // Обновляем BB-код в зависимости от типа
-            updateRatingTable();
+            // При переключении на вкладку заданий обновляем список
+            if (tabName === 'tasks') {
+                renderAllTasks();
+            }
         }
 
         function saveData() {
@@ -1230,17 +1377,71 @@
                         task.name !== 'Пир теней (штраф)'
                     );
                 }
-                
-                // Исправляем дату только для участников без даты (старые данные)
-                const targetDate = '2024-10-31';
-                participants.forEach(participant => {
-                    if (!participant.addedDate) {
-                        participant.addedDate = targetDate;
-                    }
-                });
             } else {
                 // При первом запуске добавляем стандартные задания
                 tasks = [...defaultTasks];
+            }
+        }
+
+        // ФУНКЦИЯ ДОБАВЛЕНИЯ БОНУСНЫХ ЗАДАНИЙ
+        function addBonusTask() {
+            const name = document.getElementById('bonusTaskName').value.trim();
+            const category = document.getElementById('bonusTaskCategory').value;
+            const mercy = parseInt(document.getElementById('bonusTaskMercy').value) || 2;
+            
+            if (name) {
+                const id = tasks.length > 0 ? Math.max(...tasks.map(t => t.id)) + 1 : 1;
+                tasks.push({
+                    id,
+                    name,
+                    mercy,
+                    category,
+                    isBonus: true
+                });
+                
+                // Очищаем поля формы
+                document.getElementById('bonusTaskName').value = '';
+                document.getElementById('bonusTaskMercy').value = '2';
+                
+                renderAllTasks();
+                saveData();
+                alert('Бонусное задание добавлено!');
+            } else {
+                alert('Введите название задания');
+            }
+        }
+
+        // ФУНКЦИЯ ОТОБРАЖЕНИЯ ВСЕХ ЗАДАНИЙ
+        function renderAllTasks() {
+            const container = document.getElementById('allTasksList');
+            
+            container.innerHTML = tasks.map(task => `
+                <div class="task-item ${task.isBonus ? 'completed' : ''}">
+                    <div class="task-info">
+                        <span>${task.name}</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span style="color: #C9A86A;">${categories[task.category].name}</span>
+                        <span style="color: #6B8E23;">${task.mercy} баллов</span>
+                        ${task.isBonus ? 
+                            `<button class="delete-btn" onclick="deleteTask(${task.id})">Удалить</button>` : 
+                            `<span style="color: #aaa; font-size: 0.9em;">стандартное</span>`
+                        }
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ФУНКЦИЯ УДАЛЕНИЯ ЗАДАНИЯ
+        function deleteTask(taskId) {
+            if (confirm('Вы уверены, что хотите удалить это задание?')) {
+                tasks = tasks.filter(t => t.id !== taskId);
+                // Удаляем записи в журнале для этого задания
+                journal = journal.filter(j => j.taskId !== taskId);
+                renderAllTasks();
+                saveData();
+                updateDashboard();
+                updateRatingTable();
             }
         }
 
@@ -1284,6 +1485,7 @@
                         saveData();
                         renderParticipants();
                         updateRatingTable();
+                        renderAllTasks();
                         alert('Данные импортированы успешно!');
                     } else {
                         alert('Неверный формат файла');
@@ -1386,26 +1588,376 @@
                 journal = [];
                 renderParticipants();
                 updateRatingTable();
+                renderAllTasks();
                 alert('Данные восстановлены к начальному состоянию');
             }
         }
 
-        let participants = [];
-        let tasks = [];
-        let journal = [];
-
-        function switchTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-            document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
+        // ФУНКЦИИ ДЛЯ УЧАСТНИКОВ
+        function renderParticipants() {
+            const grid = document.getElementById('participantsGrid');
             
-            // При переключении на вкладку журнала устанавливаем сегодняшнюю дату
-            if (tabName === 'journal') {
+            grid.innerHTML = participants.map(p => {
+                if (p.id === editingParticipantId) {
+                    // Режим редактирования даты
+                    return `
+                        <div class="participant-card">
+                            <div class="participant-info">
+                                <div class="participant-name">${p.name}</div>
+                                <div class="date-edit-container">
+                                    <input type="date" id="editDate-${p.id}" class="date-edit-input" value="${p.addedDate}">
+                                    <div class="date-edit-buttons">
+                                        <button class="edit-btn" onclick="saveParticipantDate(${p.id})">✓</button>
+                                        <button class="delete-btn" onclick="cancelEditParticipantDate()">✗</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // Обычное отображение
+                    return `
+                        <div class="participant-card">
+                            <div class="participant-info">
+                                <div class="participant-name">${p.name}</div>
+                                <div class="participant-date">Добавлен: ${p.addedDate}</div>
+                            </div>
+                            <div class="participant-actions">
+                                <button class="edit-btn compact-btn" onclick="editParticipantDate(${p.id})">Изм. дату</button>
+                                <button class="delete-btn compact-btn" onclick="deleteParticipant(${p.id})">Удалить</button>
+                            </div>
+                        </div>
+                    `;
+                }
+            }).join('');
+
+            updateDashboard();
+            updateRatingTable();
+        }
+
+        function addParticipant() {
+            const name = document.getElementById('newParticipantName').value.trim();
+            if (name) {
+                const id = participants.length > 0 ? Math.max(...participants.map(p => p.id)) + 1 : 1;
+                // НОВЫЕ УЧАСТНИКИ ПОЛУЧАЮТ ТЕКУЩУЮ ДАТУ
                 const today = new Date().toISOString().split('T')[0];
-                document.getElementById('journalDate').value = today;
-                loadJournalForDate();
+                participants.push({ 
+                    id, 
+                    name, 
+                    addedDate: today 
+                });
+                document.getElementById('newParticipantName').value = '';
+                renderParticipants();
+                saveData();
             }
+        }
+
+        function deleteParticipant(id) {
+            participants = participants.filter(p => p.id !== id);
+            // Удаляем записи в журнале для этого участника
+            journal = journal.filter(j => j.participantId !== id);
+            renderParticipants();
+            updateRatingTable();
+            saveData();
+        }
+
+        function editParticipantDate(id) {
+            editingParticipantId = id;
+            renderParticipants();
+        }
+
+        function cancelEditParticipantDate() {
+            editingParticipantId = null;
+            renderParticipants();
+        }
+
+        function saveParticipantDate(id) {
+            const input = document.querySelector(`#editDate-${id}`);
+            const newDate = input.value;
+            const participant = participants.find(p => p.id === id);
+            if (participant) {
+                participant.addedDate = newDate;
+                editingParticipantId = null;
+                renderParticipants();
+                saveData();
+            }
+        }
+
+        // ФУНКЦИИ ДЛЯ ЖУРНАЛА
+
+        
+		function loadJournalForDate() {
+    const dateInput = document.getElementById('journalDate');
+    currentJournalDate = dateInput.value;
+    
+    if (!currentJournalDate) {
+        alert('Пожалуйста, выберите дату');
+        return;
+    }
+    
+    // Обновляем список участников для выбранной даты
+    updateJournalParticipantSelect();
+    
+    // Сбрасываем выбранного участника
+    document.getElementById('journalParticipantSelect').value = '';
+    document.getElementById('tasksContainer').classList.remove('active');
+    document.getElementById('startedLaterMessage').style.display = 'none';
+    currentJournalParticipant = null;
+    
+    alert(`Дата ${currentJournalDate} выбрана. Теперь выберите участника.`);
+}
+		
+
+        function updateJournalParticipantSelect() {
+            const select = document.getElementById('journalParticipantSelect');
+            select.innerHTML = '<option value="">Выберите участника...</option>';
+            
+            // Добавляем всех участников, которые были добавлены до выбранной даты или в эту дату
+            participants.forEach(p => {
+                select.innerHTML += `<option value="${p.id}">${p.name}</option>`;
+            });
+        }
+
+
+function showTasksForParticipant() {
+    const participantId = parseInt(document.getElementById('journalParticipantSelect').value);
+    
+    if (!participantId) {
+        document.getElementById('tasksContainer').classList.remove('active');
+        document.getElementById('startedLaterMessage').style.display = 'none';
+        currentJournalParticipant = null;
+        return;
+    }
+    
+    // ИСПРАВЛЕНИЕ: используем уже выбранную дату из currentJournalDate
+    // Если дата не выбрана, берем из поля ввода
+    if (!currentJournalDate) {
+        currentJournalDate = document.getElementById('journalDate').value;
+    }
+    
+    if (!currentJournalDate) {
+        alert('Пожалуйста, сначала выберите дату и нажмите "Загрузить"');
+        document.getElementById('journalParticipantSelect').value = '';
+        return;
+    }
+    
+    const participant = participants.find(p => p.id === participantId);
+    if (!participant) {
+        return;
+    }
+    
+    // Преобразуем даты в объекты Date для корректного сравнения
+    const journalDate = new Date(currentJournalDate);
+    const participantStartDate = new Date(participant.addedDate);
+    
+    // Проверяем, начал ли участник квест позже выбранной даты
+    if (journalDate < participantStartDate) {
+        document.getElementById('tasksContainer').classList.remove('active');
+        document.getElementById('startedLaterMessage').style.display = 'block';
+        document.getElementById('startedLaterMessage').innerHTML = 
+            `<strong>${participant.name}</strong> начал проходить квест ${participant.addedDate}.<br>Выберите дату не ранее этой.`;
+        currentJournalParticipant = null;
+        return;
+    }
+    
+   
+    
+    currentJournalParticipant = participantId;
+    document.getElementById('tasksContainer').classList.add('active');
+    document.getElementById('startedLaterMessage').style.display = 'none';
+    
+    // Загружаем задания для выбранного участника
+    loadTasksForParticipant(participantId);
+}
+
+            
+        
+
+        function loadTasksForParticipant(participantId) {
+            // Очищаем контейнеры с заданиями
+            document.getElementById('druidTasks').innerHTML = '';
+            document.getElementById('hornedTasks').innerHTML = '';
+            document.getElementById('shadowsTasks').innerHTML = '';
+            
+            // Получаем задания по категориям
+            const druidTasks = tasks.filter(t => t.category === 'druid');
+            const hornedTasks = tasks.filter(t => t.category === 'horned');
+            const shadowsTasks = tasks.filter(t => t.category === 'shadows');
+            
+            // Отображаем задания для каждой категории
+            renderTaskCategory('druidTasks', druidTasks, participantId);
+            renderTaskCategory('hornedTasks', hornedTasks, participantId);
+            renderTaskCategory('shadowsTasks', shadowsTasks, participantId);
+        }
+
+        function renderTaskCategory(containerId, taskList, participantId) {
+            const container = document.getElementById(containerId);
+            
+            taskList.forEach(task => {
+                // Проверяем, есть ли уже запись в журнале для этого задания, участника и даты
+                const existingEntry = journal.find(j => 
+                    j.date === currentJournalDate && 
+                    j.participantId === participantId && 
+                    j.taskId === task.id
+                );
+                
+                const isCompleted = existingEntry ? existingEntry.completed : false;
+                const isSkipped = existingEntry ? existingEntry.skipped : false;
+                const mercyValue = existingEntry ? existingEntry.mercy : task.mercy;
+                
+                const taskElement = document.createElement('div');
+                taskElement.className = `task-item ${isCompleted ? 'completed' : ''} ${isSkipped ? 'skipped' : ''}`;
+                taskElement.innerHTML = `
+                    <div class="task-info">
+                        <input type="checkbox" class="task-checkbox" ${isCompleted ? 'checked' : ''} 
+                               data-task-id="${task.id}" onchange="toggleTaskCompletion(this, ${task.id}, ${participantId})">
+                        <input type="checkbox" class="task-skip-checkbox" ${isSkipped ? 'checked' : ''}
+                               data-task-id="${task.id}" onchange="toggleTaskSkip(this, ${task.id}, ${participantId})">
+                        <span>${task.name}</span>
+                    </div>
+                    <input type="number" class="task-mercy-input" value="${mercyValue}" min="0" 
+                           data-task-id="${task.id}" onchange="updateTaskMercy(this, ${task.id}, ${participantId})">
+                `;
+                
+                container.appendChild(taskElement);
+            });
+        }
+
+        function toggleTaskCompletion(checkbox, taskId, participantId) {
+            const skipCheckbox = document.querySelector(`.task-skip-checkbox[data-task-id="${taskId}"]`);
+            const mercyInput = document.querySelector(`.task-mercy-input[data-task-id="${taskId}"]`);
+            const taskItem = checkbox.closest('.task-item');
+            
+            if (checkbox.checked) {
+                // Снимаем отметку "пропущено" если ставим "выполнено"
+                skipCheckbox.checked = false;
+                
+                // Добавляем запись в журнал
+                const existingIndex = journal.findIndex(j => 
+                    j.date === currentJournalDate && 
+                    j.participantId === participantId && 
+                    j.taskId === taskId
+                );
+                
+                if (existingIndex === -1) {
+                    const id = journal.length > 0 ? Math.max(...journal.map(j => j.id)) + 1 : 1;
+                    journal.push({
+                        id,
+                        date: currentJournalDate,
+                        participantId,
+                        taskId,
+                        mercy: parseInt(mercyInput.value) || 0,
+                        completed: true,
+                        skipped: false
+                    });
+                } else {
+                    // Обновляем существующую запись
+                    journal[existingIndex].completed = true;
+                    journal[existingIndex].skipped = false;
+                    journal[existingIndex].mercy = parseInt(mercyInput.value) || 0;
+                }
+                
+                // Обновляем внешний вид
+                taskItem.classList.add('completed');
+                taskItem.classList.remove('skipped');
+            } else {
+                // Снимаем выполнение
+                
+                // Удаляем запись из журнала
+                journal = journal.filter(j => 
+                    !(j.date === currentJournalDate && 
+                      j.participantId === participantId && 
+                      j.taskId === taskId)
+                );
+                
+                // Обновляем внешний вид
+                taskItem.classList.remove('completed');
+            }
+            
+            saveData();
+            updateDashboard();
+            updateRatingTable();
+        }
+
+        function toggleTaskSkip(checkbox, taskId, participantId) {
+            const completionCheckbox = document.querySelector(`.task-checkbox[data-task-id="${taskId}"]`);
+            const mercyInput = document.querySelector(`.task-mercy-input[data-task-id="${taskId}"]`);
+            const taskItem = checkbox.closest('.task-item');
+            
+            if (checkbox.checked) {
+                // Снимаем отметку "выполнено" если ставим "пропущено"
+                completionCheckbox.checked = false;
+                
+                // Добавляем запись в журнал
+                const existingIndex = journal.findIndex(j => 
+                    j.date === currentJournalDate && 
+                    j.participantId === participantId && 
+                    j.taskId === taskId
+                );
+                
+                if (existingIndex === -1) {
+                    const id = journal.length > 0 ? Math.max(...journal.map(j => j.id)) + 1 : 1;
+                    journal.push({
+                        id,
+                        date: currentJournalDate,
+                        participantId,
+                        taskId,
+                        mercy: 0,
+                        completed: false,
+                        skipped: true
+                    });
+                } else {
+                    // Обновляем существующую запись
+                    journal[existingIndex].completed = false;
+                    journal[existingIndex].skipped = true;
+                    journal[existingIndex].mercy = 0;
+                }
+                
+                // Обновляем внешний вид
+                taskItem.classList.add('skipped');
+                taskItem.classList.remove('completed');
+            } else {
+                // Снимаем пропуск
+                
+                // Удаляем запись из журнала
+                journal = journal.filter(j => 
+                    !(j.date === currentJournalDate && 
+                      j.participantId === participantId && 
+                      j.taskId === taskId)
+                );
+                
+                // Обновляем внешний вид
+                taskItem.classList.remove('skipped');
+            }
+            
+            saveData();
+            updateDashboard();
+            updateRatingTable();
+        }
+
+        function updateTaskMercy(input, taskId, participantId) {
+            const mercyValue = parseInt(input.value) || 0;
+            
+            // Находим запись в журнале
+            const existingIndex = journal.findIndex(j => 
+                j.date === currentJournalDate && 
+                j.participantId === participantId && 
+                j.taskId === taskId
+            );
+            
+            if (existingIndex !== -1) {
+                // Обновляем существующую запись
+                journal[existingIndex].mercy = mercyValue;
+                saveData();
+                updateDashboard();
+                updateRatingTable();
+            }
+        }
+
+        function saveJournalEntries() {
+            // Эта функция теперь не нужна, так как изменения сохраняются автоматически
+            // при изменении чекбоксов и полей ввода
+            alert('Все изменения уже сохранены автоматически!');
         }
 
         function updateDashboard() {
@@ -1414,10 +1966,12 @@
             const participantAnger = participantCount * 78; // 78 за каждого участника
             const initialAnger = baseAnger + participantAnger;
             
-            // Считаем общую милость из журнала
+            // Считаем общую милость из журнала (только выполненные задания)
             let totalMercy = 0;
             journal.forEach(entry => {
-                totalMercy += entry.mercy;
+                if (entry.completed && !entry.skipped) {
+                    totalMercy += entry.mercy;
+                }
             });
             
             const currentAnger = Math.max(0, initialAnger - totalMercy);
@@ -1471,7 +2025,7 @@
         }
 
         function updateRatingTable() {
-            // Собираем статистику по участникам
+            // Собираем статистику по участникам (только выполненные задания)
             const participantStats = {};
             
             participants.forEach(participant => {
@@ -1486,16 +2040,18 @@
                 };
             });
             
-            // Заполняем статистику из журнала
+            // Заполняем статистику из журнала (только выполненные задания)
             journal.forEach(entry => {
-                const participant = participantStats[entry.participantId];
-                const task = tasks.find(t => t.id === entry.taskId);
-                
-                if (participant && task) {
-                    participant.total += entry.mercy;
+                if (entry.completed && !entry.skipped) {
+                    const participant = participantStats[entry.participantId];
+                    const task = tasks.find(t => t.id === entry.taskId);
                     
-                    if (task.category && participant.byCategory[task.category] !== undefined) {
-                        participant.byCategory[task.category] += entry.mercy;
+                    if (participant && task) {
+                        participant.total += entry.mercy;
+                        
+                        if (task.category && participant.byCategory[task.category] !== undefined) {
+                            participant.byCategory[task.category] += entry.mercy;
+                        }
                     }
                 }
             });
@@ -1731,6 +2287,81 @@
                 bbCodeTextarea.value = bbCode;
             }
         }
+		
+		function switchRatingType(type) {
+    currentRatingType = type;
+    
+    // Скрываем все таблицы рейтинга
+    document.getElementById('blindRating').style.display = 'none';
+    document.getElementById('mediumRating').style.display = 'none';
+    document.getElementById('detailedRating').style.display = 'none';
+    
+    // Убираем активный класс со всех кнопок
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    // Показываем выбранный тип рейтинга
+    if (type === 'blind') {
+        document.getElementById('blindRating').style.display = 'block';
+        document.querySelectorAll('.toggle-btn')[0].classList.add('active');
+    } else if (type === 'medium') {
+        document.getElementById('mediumRating').style.display = 'block';
+        document.querySelectorAll('.toggle-btn')[1].classList.add('active');
+    } else if (type === 'detailed') {
+        document.getElementById('detailedRating').style.display = 'block';
+        document.querySelectorAll('.toggle-btn')[2].classList.add('active');
+    }
+    
+    // Обновляем BB-код для нового типа рейтинга
+    const participantStats = {};
+    participants.forEach(participant => {
+        participantStats[participant.id] = {
+            name: participant.name,
+            total: 0,
+            byCategory: {
+                'druid': 0,
+                'horned': 0,
+                'shadows': 0
+            }
+        };
+    });
+    
+    journal.forEach(entry => {
+        if (entry.completed && !entry.skipped) {
+            const participant = participantStats[entry.participantId];
+            const task = tasks.find(t => t.id === entry.taskId);
+            
+            if (participant && task) {
+                participant.total += entry.mercy;
+                if (task.category && participant.byCategory[task.category] !== undefined) {
+                    participant.byCategory[task.category] += entry.mercy;
+                }
+            }
+        }
+    });
+    
+    const categoryLeaders = {
+        'druid': { score: 0, participants: [] },
+        'horned': { score: 0, participants: [] },
+        'shadows': { score: 0, participants: [] }
+    };
+    
+    Object.values(participantStats).forEach(stat => {
+        Object.keys(categoryLeaders).forEach(category => {
+            if (stat.byCategory[category] > categoryLeaders[category].score) {
+                categoryLeaders[category].score = stat.byCategory[category];
+                categoryLeaders[category].participants = [stat.name];
+            } else if (stat.byCategory[category] === categoryLeaders[category].score && stat.byCategory[category] > 0) {
+                categoryLeaders[category].participants.push(stat.name);
+            }
+        });
+    });
+    
+    const sortedStats = Object.values(participantStats).sort((a, b) => b.total - a.total);
+    generateBBCode(sortedStats, categoryLeaders);
+}
+		
 
         function copyBBCode() {
             const bbCodeTextarea = document.getElementById('ratingBBCode');
@@ -1739,229 +2370,10 @@
             alert('BB-код скопирован в буфер обмена!');
         }
 
-        // ОБНОВЛЕННАЯ ФУНКЦИЯ ДЛЯ ОТОБРАЖЕНИЯ УЧАСТНИКОВ
-        function renderParticipants() {
-            const grid = document.getElementById('participantsGrid');
-            
-            grid.innerHTML = participants.map(p => `
-                <div class="participant-card">
-                    <div class="participant-info">
-                        <div class="participant-name">${p.name}</div>
-                        <div class="participant-date">Добавлен: ${p.addedDate || 'Неизвестно'}</div>
-                    </div>
-                    <div class="participant-actions">
-                        <button class="delete-btn compact-btn" onclick="deleteParticipant(${p.id})">Удалить</button>
-                    </div>
-                </div>
-            `).join('');
-
-            updateDashboard();
-            updateRatingTable();
-        }
-
-        function addParticipant() {
-            const name = document.getElementById('newParticipantName').value.trim();
-            if (name) {
-                const id = participants.length > 0 ? Math.max(...participants.map(p => p.id)) + 1 : 1;
-                const today = new Date().toISOString().split('T')[0];
-                participants.push({ 
-                    id, 
-                    name, 
-                    addedDate: today 
-                });
-                document.getElementById('newParticipantName').value = '';
-                renderParticipants();
-                saveData();
-            }
-        }
-
-        function deleteParticipant(id) {
-            participants = participants.filter(p => p.id !== id);
-            // Удаляем записи в журнале для этого участника
-            journal = journal.filter(j => j.participantId !== id);
-            renderParticipants();
-            updateRatingTable();
-            saveData();
-        }
-
-        // ФУНКЦИИ ДЛЯ ЖУРНАЛА
-
-        function loadJournalForDate() {
-            const dateInput = document.getElementById('journalDate');
-            currentJournalDate = dateInput.value;
-            
-            if (!currentJournalDate) {
-                alert('Пожалуйста, выберите дату');
-                return;
-            }
-            
-            // Обновляем список участников для выбранной даты
-            updateJournalParticipantSelect();
-            
-            // Сбрасываем выбранного участника
-            document.getElementById('journalParticipantSelect').value = '';
-            document.getElementById('tasksContainer').classList.remove('active');
-            document.getElementById('startedLaterMessage').style.display = 'none';
-            currentJournalParticipant = null;
-        }
-
-        function updateJournalParticipantSelect() {
-            const select = document.getElementById('journalParticipantSelect');
-            select.innerHTML = '<option value="">Выберите участника...</option>';
-            
-            // Добавляем всех участников, которые были добавлены до выбранной даты или в эту дату
-            participants.forEach(p => {
-                select.innerHTML += `<option value="${p.id}">${p.name}</option>`;
-            });
-        }
-
-        function showTasksForParticipant() {
-            const participantId = parseInt(document.getElementById('journalParticipantSelect').value);
-            
-            if (!participantId) {
-                document.getElementById('tasksContainer').classList.remove('active');
-                document.getElementById('startedLaterMessage').style.display = 'none';
-                currentJournalParticipant = null;
-                return;
-            }
-            
-            const participant = participants.find(p => p.id === participantId);
-            if (!participant) {
-                return;
-            }
-            
-            // Проверяем, начал ли участник квест позже выбранной даты
-            if (currentJournalDate < participant.addedDate) {
-                document.getElementById('tasksContainer').classList.remove('active');
-                document.getElementById('startedLaterMessage').style.display = 'block';
-                document.getElementById('startedLaterMessage').innerHTML = 
-                    `<strong>${participant.name}</strong> начал проходить квест ${participant.addedDate}.<br>Выберите дату не ранее этой.`;
-                currentJournalParticipant = null;
-                return;
-            }
-            
-            currentJournalParticipant = participantId;
-            document.getElementById('tasksContainer').classList.add('active');
-            document.getElementById('startedLaterMessage').style.display = 'none';
-            
-            // Загружаем задания для выбранного участника
-            loadTasksForParticipant(participantId);
-        }
-
-        function loadTasksForParticipant(participantId) {
-            // Очищаем контейнеры с заданиями
-            document.getElementById('druidTasks').innerHTML = '';
-            document.getElementById('hornedTasks').innerHTML = '';
-            document.getElementById('shadowsTasks').innerHTML = '';
-            
-            // Получаем задания по категориям
-            const druidTasks = tasks.filter(t => t.category === 'druid');
-            const hornedTasks = tasks.filter(t => t.category === 'horned');
-            const shadowsTasks = tasks.filter(t => t.category === 'shadows');
-            
-            // Отображаем задания для каждой категории
-            renderTaskCategory('druidTasks', druidTasks, participantId);
-            renderTaskCategory('hornedTasks', hornedTasks, participantId);
-            renderTaskCategory('shadowsTasks', shadowsTasks, participantId);
-        }
-
-        function renderTaskCategory(containerId, taskList, participantId) {
-            const container = document.getElementById(containerId);
-            
-            taskList.forEach(task => {
-                // Проверяем, есть ли уже запись в журнале для этого задания, участника и даты
-                const existingEntry = journal.find(j => 
-                    j.date === currentJournalDate && 
-                    j.participantId === participantId && 
-                    j.taskId === task.id
-                );
-                
-                const isCompleted = existingEntry ? true : false;
-                const mercyValue = existingEntry ? existingEntry.mercy : task.mercy;
-                
-                const taskElement = document.createElement('div');
-                taskElement.className = 'task-item';
-                taskElement.innerHTML = `
-                    <div class="task-info">
-                        <input type="checkbox" class="task-checkbox" ${isCompleted ? 'checked' : ''} 
-                               data-task-id="${task.id}" onchange="toggleTaskCompletion(this, ${task.id}, ${participantId})">
-                        <span>${task.name}</span>
-                    </div>
-                    <input type="number" class="task-mercy-input" value="${mercyValue}" min="0" 
-                           data-task-id="${task.id}" onchange="updateTaskMercy(this, ${task.id}, ${participantId})">
-                `;
-                
-                container.appendChild(taskElement);
-            });
-        }
-
-        function toggleTaskCompletion(checkbox, taskId, participantId) {
-            const mercyInput = document.querySelector(`.task-mercy-input[data-task-id="${taskId}"]`);
-            const mercyValue = parseInt(mercyInput.value) || 0;
-            
-            if (checkbox.checked) {
-                // Добавляем запись в журнал
-                const existingIndex = journal.findIndex(j => 
-                    j.date === currentJournalDate && 
-                    j.participantId === participantId && 
-                    j.taskId === taskId
-                );
-                
-                if (existingIndex === -1) {
-                    const id = journal.length > 0 ? Math.max(...journal.map(j => j.id)) + 1 : 1;
-                    journal.push({
-                        id,
-                        date: currentJournalDate,
-                        participantId,
-                        taskId,
-                        mercy: mercyValue
-                    });
-                } else {
-                    // Обновляем существующую запись
-                    journal[existingIndex].mercy = mercyValue;
-                }
-            } else {
-                // Удаляем запись из журнала
-                journal = journal.filter(j => 
-                    !(j.date === currentJournalDate && 
-                      j.participantId === participantId && 
-                      j.taskId === taskId)
-                );
-            }
-            
-            saveData();
-            updateDashboard();
-            updateRatingTable();
-        }
-
-        function updateTaskMercy(input, taskId, participantId) {
-            const mercyValue = parseInt(input.value) || 0;
-            
-            // Находим запись в журнале
-            const existingIndex = journal.findIndex(j => 
-                j.date === currentJournalDate && 
-                j.participantId === participantId && 
-                j.taskId === taskId
-            );
-            
-            if (existingIndex !== -1) {
-                // Обновляем существующую запись
-                journal[existingIndex].mercy = mercyValue;
-                saveData();
-                updateDashboard();
-                updateRatingTable();
-            }
-        }
-
-        function saveJournalEntries() {
-            // Эта функция теперь не нужна, так как изменения сохраняются автоматически
-            // при изменении чекбоксов и полей ввода
-            alert('Все изменения уже сохранены автоматически!');
-        }
-
         window.addEventListener('load', () => {
             loadData();
             renderParticipants();
+            renderAllTasks();
             // Устанавливаем слепой рейтинг по умолчанию
             switchRatingType('blind');
             
