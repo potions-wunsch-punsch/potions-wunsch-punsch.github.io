@@ -1055,7 +1055,7 @@
                     <div class="anger-display">
                         <div class="anger-stat">
                             <span>Базовый гнев:</span>
-                            <span id="baseAnger">936</span>
+                            <span id="baseAnger">1750</span>
                         </div>
                         <div class="anger-stat">
                             <span>Количество участников:</span>
@@ -1067,7 +1067,7 @@
                         </div>
                         <div class="anger-stat">
                             <span>Гнев Кернунна:</span>
-                            <span id="initialAnger" style="color: #B22222; font-size: 1.1em;">936</span>
+                            <span id="initialAnger" style="color: #B22222; font-size: 1.1em;">1750</span>
                         </div>
                         <div style="border-top: 2px solid rgba(255, 255, 255, 0.2); margin: 8px 0;"></div>
                         <div class="anger-stat">
@@ -1076,18 +1076,18 @@
                         </div>
                         <div class="anger-stat">
                             <span>Оставшийся гнев:</span>
-                            <span id="currentAnger" class="anger-value high">936</span>
+                            <span id="currentAnger" class="anger-value high">1750</span>
                         </div>
                     </div>
                     <div class="anger-bar">
-                        <div id="mercyFillLeader" class="anger-fill" style="width: 0%;">0 / 936</div>
+                        <div id="mercyFillLeader" class="anger-fill" style="width: 0%;">0 / 1750</div>
                     </div>
 
                     <h3 style="margin-top: 15px; color: #C9A86A; font-size: 1.3em;">Диаграмма (баллы)</h3>
                     <div class="chart-container">
                         <div class="chart-bar">
                             <div class="chart-label">Базовый гнев</div>
-                            <div class="chart-bar-visual anger" id="chartBaseAnger" style="width: 120px;">936</div>
+                            <div class="chart-bar-visual anger" id="chartBaseAnger" style="width: 120px;">1750</div>
                         </div>
                         <div class="chart-bar">
                             <div class="chart-label">Гнев участников</div>
@@ -1099,7 +1099,7 @@
                         </div>
                         <div class="chart-bar" style="margin-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.2); padding-top: 12px;">
                             <div class="chart-label">Оставшийся гнев</div>
-                            <div class="chart-bar-visual anger" id="chartCurrentAnger" style="width: 120px;">936</div>
+                            <div class="chart-bar-visual anger" id="chartCurrentAnger" style="width: 120px;">1750</div>
                         </div>
                     </div>
                 </div>
@@ -1961,7 +1961,7 @@ function showTasksForParticipant() {
         }
 
         function updateDashboard() {
-            const baseAnger = 936;
+            const baseAnger = 1750;
             const participantCount = participants.length;
             const participantAnger = participantCount * 78; // 78 за каждого участника
             const initialAnger = baseAnger + participantAnger;
@@ -2007,7 +2007,7 @@ function showTasksForParticipant() {
             // Обновляем диаграммы с пропорциональным отображением
             const maxWidth = 250; // Максимальная ширина для диаграмм
             
-            // Базовый гнев (936) - всегда отображается как фиксированная часть
+            // Базовый гнев (1750) - всегда отображается как фиксированная часть
             document.getElementById('chartBaseAnger').style.width = (baseAnger / initialAnger * maxWidth) + 'px';
             document.getElementById('chartBaseAnger').textContent = baseAnger;
             
