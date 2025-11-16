@@ -398,19 +398,19 @@
         let selectedCandies = [];
 
         const candies = [
-            { url: 'sweets/eye1.png', category: 'eye', name: 'Карамельный глаз' },
-            { url: 'sweets/fing1.png', category: 'fing', name: 'Зомби палец' },
-            { url: 'sweets/fing2.png', category: 'fing', name: 'Хрустящий палец' },
-            { url: 'sweets/gh1.png', category: 'gh', name: 'Призрачная тянучка' },
-            { url: 'sweets/gh2.png', category: 'gh', name: 'Воздушное приведение' },
-            { url: 'sweets/gh3.png', category: 'gh', name: 'Леденец-призрак' },
-            { url: 'sweets/gh4.png', category: 'gh', name: 'Мармеладный дух' },
-            { url: 'sweets/pump1.png', category: 'pump', name: 'Сахарная тыква' },
-            { url: 'sweets/pump2.png', category: 'pump', name: 'Карамельная тыква' },
-            { url: 'sweets/pump3.png', category: 'pump', name: 'Медовая тыква' },
-            { url: 'sweets/sp1.png', category: 'sp', name: 'Лакричный паук' },
-            { url: 'sweets/sp2.png', category: 'sp', name: 'Шоколадный паук' },
-            { url: 'sweets/sp3.png', category: 'sp', name: 'Ядовитый паук' }
+            { url: 'https://raw.githubusercontent.com/potions-wunsch-punsch/potions-wunsch-punsch.github.io/89e139ac7daa2dd9d0a9c40265ac3c54ee3cc540/sweets/eye1.png', category: 'eye', name: 'Карамельный глаз' },
+            { url: 'https://raw.githubusercontent.com/potions-wunsch-punsch/potions-wunsch-punsch.github.io/89e139ac7daa2dd9d0a9c40265ac3c54ee3cc540/sweets/fing1.png', category: 'fing', name: 'Зомби палец' },
+            { url: 'https://raw.githubusercontent.com/potions-wunsch-punsch/potions-wunsch-punsch.github.io/89e139ac7daa2dd9d0a9c40265ac3c54ee3cc540/sweets/fing2.png', category: 'fing', name: 'Хрустящий палец' },
+            { url: 'https://raw.githubusercontent.com/potions-wunsch-punsch/potions-wunsch-punsch.github.io/89e139ac7daa2dd9d0a9c40265ac3c54ee3cc540/sweets/gh1.png', category: 'gh', name: 'Призрачная тянучка' },
+            { url: 'https://raw.githubusercontent.com/potions-wunsch-punsch/potions-wunsch-punsch.github.io/89e139ac7daa2dd9d0a9c40265ac3c54ee3cc540/sweets/gh2.png', category: 'gh', name: 'Воздушное приведение' },
+            { url: 'https://raw.githubusercontent.com/potions-wunsch-punsch/potions-wunsch-punsch.github.io/89e139ac7daa2dd9d0a9c40265ac3c54ee3cc540/sweets/gh3.png', category: 'gh', name: 'Леденец-призрак' },
+            { url: 'https://raw.githubusercontent.com/potions-wunsch-punsch/potions-wunsch-punsch.github.io/89e139ac7daa2dd9d0a9c40265ac3c54ee3cc540/sweets/gh4.png', category: 'gh', name: 'Мармеладный дух' },
+            { url: 'https://raw.githubusercontent.com/potions-wunsch-punsch/potions-wunsch-punsch.github.io/89e139ac7daa2dd9d0a9c40265ac3c54ee3cc540/sweets/pump1.png', category: 'pump', name: 'Сахарная тыква' },
+            { url: 'https://raw.githubusercontent.com/potions-wunsch-punsch/potions-wunsch-punsch.github.io/89e139ac7daa2dd9d0a9c40265ac3c54ee3cc540/sweets/pump2.png', category: 'pump', name: 'Карамельная тыква' },
+            { url: 'https://raw.githubusercontent.com/potions-wunsch-punsch/potions-wunsch-punsch.github.io/89e139ac7daa2dd9d0a9c40265ac3c54ee3cc540/sweets/pump3.png', category: 'pump', name: 'Медовая тыква' },
+            { url: 'https://raw.githubusercontent.com/potions-wunsch-punsch/potions-wunsch-punsch.github.io/89e139ac7daa2dd9d0a9c40265ac3c54ee3cc540/sweets/sp1.png', category: 'sp', name: 'Лакричный паук' },
+            { url: 'https://raw.githubusercontent.com/potions-wunsch-punsch/potions-wunsch-punsch.github.io/89e139ac7daa2dd9d0a9c40265ac3c54ee3cc540/sweets/sp2.png', category: 'sp', name: 'Шоколадный паук' },
+            { url: 'https://raw.githubusercontent.com/potions-wunsch-punsch/potions-wunsch-punsch.github.io/89e139ac7daa2dd9d0a9c40265ac3c54ee3cc540/sweets/sp3.png', category: 'sp', name: 'Ядовитый паук' }
         ];
 
         function increaseCounter() {
@@ -461,7 +461,12 @@
             const carouselContainer = document.getElementById('carouselContainer');
             carouselContainer.innerHTML = '';
 
-            console.log('Selected candies:', selectedCandies); // Для отладки
+            console.log('Selected candies:', selectedCandies);
+            console.log('Counter value:', counterValue);
+
+            if (selectedCandies.length === 0) {
+                carouselContainer.innerHTML = '<div style="color: #ff9500; text-align: center;">Ошибка: конфеты не выбраны!</div>';
+            }
 
             selectedCandies.forEach((candy, index) => {
                 const slide = document.createElement('div');
@@ -472,12 +477,18 @@
                 img.src = candy.url;
                 img.alt = candy.name;
                 img.className = 'candy-image';
-                img.crossOrigin = 'anonymous';
                 
-                // Обработка ошибки загрузки
+                img.onload = function() {
+                    console.log('Image loaded successfully:', candy.url);
+                };
+                
                 img.onerror = function() {
                     console.error('Failed to load image:', candy.url);
-                    this.style.display = 'none';
+                    // Показываем плейсхолдер вместо изображения
+                    const placeholder = document.createElement('div');
+                    placeholder.style.cssText = 'width: 200px; height: 200px; background: #ff6b00; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px;';
+                    placeholder.textContent = '🍬';
+                    this.parentNode.replaceChild(placeholder, this);
                 };
                 
                 const nameDiv = document.createElement('div');
@@ -487,6 +498,8 @@
                 slide.appendChild(img);
                 slide.appendChild(nameDiv);
                 carouselContainer.appendChild(slide);
+                
+                console.log('Slide created for:', candy.name);
             });
 
             const navElement = document.getElementById('carouselNav');
@@ -498,6 +511,8 @@
 
             updateIndicator();
             document.getElementById('modalOverlay').classList.add('active');
+            
+            console.log('Modal opened, slides in DOM:', document.querySelectorAll('.carousel-slide').length);
         }
 
         function updateIndicator() {
