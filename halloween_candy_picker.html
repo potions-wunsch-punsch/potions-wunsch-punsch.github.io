@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сладость за пакость!</title>
+    <title>Следить за пакость?</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik+Burned&display=swap" rel="stylesheet">
@@ -351,7 +351,7 @@
              class="spider-web">
         
         <div class="content">
-            <h1>Сладость за пакость!</h1>
+            <h1>Следить за пакость?</h1>
             
             <div class="pumpkin-container">
                 <img src="https://s1.radikal.cloud/2025/10/31/20251029_1552_Pumpkin-Candy-Cauldron_simple_compose_01k8r0bcjtev2amexgtx3c2qkf46bc145a340ce1db.png" 
@@ -428,29 +428,44 @@
         }
 
         function getRandomCandies(count) {
+            console.log('Starting getRandomCandies with count:', count);
+            console.log('Total candies available:', candies.length);
+            
             const available = [...candies];
             const selected = [];
             const categoryCount = {};
 
             for (let i = 0; i < count && available.length > 0; i++) {
                 let attempts = 0;
-                let candy;
+                let candy = null;
+                let candyIndex = -1;
+                
+                console.log(`Selecting candy ${i + 1} of ${count}`);
                 
                 do {
-                    const randomIndex = Math.floor(Math.random() * available.length);
-                    candy = available[randomIndex];
+                    candyIndex = Math.floor(Math.random() * available.length);
+                    candy = available[candyIndex];
                     attempts++;
                     
-                    if (attempts > 100) break;
-                } while (categoryCount[candy.category] >= 2);
+                    console.log(`Attempt ${attempts}: Checking ${candy.name}, category: ${candy.category}, count: ${categoryCount[candy.category] || 0}`);
+                    
+                    if (attempts > 100) {
+                        console.warn('Too many attempts, forcing selection');
+                        break;
+                    }
+                } while (categoryCount[candy.category] >= 2 && available.length > 1);
 
-                if (categoryCount[candy.category] < 2 || attempts > 100) {
+                if (candy && (categoryCount[candy.category] < 2 || attempts > 100)) {
                     selected.push(candy);
                     categoryCount[candy.category] = (categoryCount[candy.category] || 0) + 1;
-                    available.splice(available.indexOf(candy), 1);
+                    available.splice(candyIndex, 1);
+                    console.log(`Selected: ${candy.name}`);
+                } else {
+                    console.error('Failed to select candy');
                 }
             }
 
+            console.log('Final selected candies:', selected);
             return selected;
         }
 
