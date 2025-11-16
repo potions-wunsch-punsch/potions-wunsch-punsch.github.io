@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Следить за пакость?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Burned&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background-image: url('background.jpg');
+            background-size: auto;
+            background-position: center;
+            background-color: #0a0a0a;
+            color: #f4e4bc;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .main-block {
+            background: linear-gradient(135deg, #1a1f4d 0%, #0d1129 100%);
+            max-width: 600px;
+            width: 100%;
+            border-radius: 20px;
+            border: 3px solid #ff6b00;
+            box-shadow: 0 0 30px rgba(255, 107, 0, 0.5), inset 0 0 50px rgba(0, 0, 0, 0.3);
+            padding: 40px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .spider-web {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120%;
+            max-width: 700px;
+            opacity: 0.8;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        h1 {
+            font-family: "Rubik Burned", system-ui;
+            font-size: 3.5em;
+            text-align: center;
+            background: linear-gradient(45deg, #ff6b00, #ff9500, #ffb700, #ff9500, #ff6b00);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(255, 107, 0, 0.5);
+            animation: gradient 3s ease infinite;
+            margin-top: 60px;
+        }
+
+        @keyframes gradient {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+        }
+
+        .pumpkin-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .pumpkin-image {
+            max-width: 250px;
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            filter: drop-shadow(0 0 15px rgba(255, 107, 0, 0.6));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-10px) scale(1.03);
+            }
+        }
+
+        .pumpkin-image:hover {
+            animation: none;
+            transform: scale(1.15) rotate(5deg);
+            filter: drop-shadow(0 0 25px rgba(255, 107, 0, 0.9));
+        }
+
+        .pumpkin-text {
+            font-size: 1.2em;
+            color: #ff9500;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
+            font-weight: bold;
+        }
+
+        .counter-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 10px 0;
+        }
+
+        .counter-label {
+            font-size: 1.1em;
+            color: #ff9500;
+            text-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
+        }
+
+        .counter-btn {
+            background: linear-gradient(135deg, #ff6b00, #ff9500);
+            color: #1a1129;
+            border: none;
+            width: 40px;
+            height: 40px;
+            font-size: 1.5em;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(255, 107, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .counter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 107, 0, 0.6);
+        }
+
+        .counter-value {
+            font-size: 1.5em;
+            color: #f4e4bc;
+            font-weight: bold;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #2a1f4d 0%, #1a1129 100%);
+            border: 3px solid #ff6b00;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 0 40px rgba(255, 107, 0, 0.7);
+            position: relative;
+            animation: modalAppear 0.3s ease;
+        }
+
+        @keyframes modalAppear {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-title {
+            font-family: "Rubik Burned", system-ui;
+            font-size: 2em;
+            color: #ff6b00;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(255, 107, 0, 0.5);
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .carousel-slide {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .carousel-slide.active {
+            display: flex;
+        }
+
+        .candy-image {
+            max-width: 200px;
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 0 15px rgba(255, 107, 0, 0.6));
+            animation: candyAppear 0.5s ease;
+        }
+
+        @keyframes candyAppear {
+            from {
+                transform: scale(0) rotate(-180deg);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .candy-name {
+            font-size: 1.3em;
+            color: #ff9500;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
+            font-weight: bold;
+        }
+
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .carousel-btn {
+            background: linear-gradient(135deg, #ff6b00, #ff9500);
+            color: #1a1129;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .carousel-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 0, 0.6);
+        }
+
+        .carousel-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .carousel-indicator {
+            text-align: center;
+            color: #f4e4bc;
+            font-size: 1em;
+            margin: 10px 0;
+        }
+
+        .close-btn {
+            background: linear-gradient(135deg, #ff6b00, #ff9500);
+            color: #1a1129;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto 0;
+            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 0, 0.6);
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.5em;
+                margin-top: 40px;
+            }
+
+            .main-block {
+                padding: 30px 20px;
+            }
+
+            .pumpkin-image {
+                max-width: 200px;
+            }
+
+            .modal-content {
+                padding: 25px;
+            }
+
+            .modal-title {
+                font-size: 1.6em;
+            }
+
+            .candy-image {
+                max-width: 150px;
+            }
+
+            .candy-name {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-block">
+        <img src="https://s1.radikal.cloud/2025/10/31/Pngtreecartoon-white-spider-web-border_23181261d834dd382bc328c3.png" 
+             alt="Паутина" 
+             class="spider-web">
+        
+        <div class="content">
+            <h1>Следить за пакость?</h1>
+            
+            <div class="pumpkin-container">
+                <img src="https://s1.radikal.cloud/2025/10/31/20251029_1552_Pumpkin-Candy-Cauldron_simple_compose_01k8r0bcjtev2amexgtx3c2qkf46bc145a340ce1db.png" 
+                     alt="Тыква с конфетами" 
+                     class="pumpkin-image"
+                     onclick="showCandies()">
+                
+                <div class="pumpkin-text">
+                    скорее нажми на тыкву,<br>чтобы взять конфетку
+                </div>
+            </div>
+
+            <div class="counter-container">
+                <span class="counter-label">Сколько конфет:</span>
+                <button class="counter-btn" onclick="decreaseCounter()">−</button>
+                <span class="counter-value" id="counterValue">1</span>
+                <button class="counter-btn" onclick="increaseCounter()">+</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-title">Твои конфеты!</div>
+            
+            <div class="carousel-container" id="carouselContainer">
+                <!-- Слайды будут добавлены динамически -->
+            </div>
+
+            <div class="carousel-nav" id="carouselNav" style="display: none;">
+                <button class="carousel-btn" onclick="prevSlide()">← Назад</button>
+                <button class="carousel-btn" onclick="nextSlide()">Вперед →</button>
+            </div>
+
+            <div class="carousel-indicator" id="carouselIndicator"></div>
+
+            <button class="close-btn" onclick="closeModal()">Взять еще сладостей</button>
+        </div>
+    </div>
+
+    <script>
+        let counterValue = 1;
+        let currentSlide = 0;
+        let selectedCandies = [];
+
+        const candies = [
+            { url: 'https://i.postimg.cc/tJBvfPfr/eye1.png', category: 'eye', name: 'Карамельный глаз' },
+            { url: 'https://i.postimg.cc/3RBt4mKG/fing1.png', category: 'fing', name: 'Зомби палец' },
+            { url: 'https://i.postimg.cc/50Ytjq5k/fing2.png', category: 'fing', name: 'Хрустящий палец' },
+            { url: 'https://i.postimg.cc/4xqqs6df/gh1.png', category: 'gh', name: 'Призрачная тянучка' },
+            { url: 'https://i.postimg.cc/FH78MW95/gh2.png', category: 'gh', name: 'Воздушное приведение' },
+            { url: 'https://i.postimg.cc/526Th7fG/gh3.png', category: 'gh', name: 'Леденец-призрак' },
+            { url: 'https://i.postimg.cc/Bb3GsxmB/gh4.png', category: 'gh', name: 'Мармеладный дух' },
+            { url: 'https://i.postimg.cc/B6KqJZsy/pump1.png', category: 'pump', name: 'Сахарная тыква' },
+            { url: 'https://i.postimg.cc/bwrfzY9F/pump2.png', category: 'pump', name: 'Карамельная тыква' },
+            { url: 'https://i.postimg.cc/XJd0T2cT/pump3.png', category: 'pump', name: 'Медовая тыква' },
+            { url: 'https://i.postimg.cc/fyshZx8M/sp1.png', category: 'sp', name: 'Лакричный паук' },
+            { url: 'https://i.postimg.cc/4d5W7VJV/sp2.png', category: 'sp', name: 'Шоколадный паук' },
+            { url: 'https://i.postimg.cc/503sYLx8/sp3.png', category: 'sp', name: 'Ядовитый паук' }
+        ];
+
+        function increaseCounter() {
+            if (counterValue < 6) {
+                counterValue++;
+                document.getElementById('counterValue').textContent = counterValue;
+            }
+        }
+
+        function decreaseCounter() {
+            if (counterValue > 1) {
+                counterValue--;
+                document.getElementById('counterValue').textContent = counterValue;
+            }
+        }
+
+        function getRandomCandies(count) {
+            const available = [...candies];
+            const selected = [];
+            const categoryCount = {};
+
+            for (let i = 0; i < count && available.length > 0; i++) {
+                let attempts = 0;
+                let candy;
+                
+                do {
+                    const randomIndex = Math.floor(Math.random() * available.length);
+                    candy = available[randomIndex];
+                    attempts++;
+                    
+                    if (attempts > 100) break;
+                } while (categoryCount[candy.category] >= 2);
+
+                if (categoryCount[candy.category] < 2 || attempts > 100) {
+                    selected.push(candy);
+                    categoryCount[candy.category] = (categoryCount[candy.category] || 0) + 1;
+                    available.splice(available.indexOf(candy), 1);
+                }
+            }
+
+            return selected;
+        }
+
+        function showCandies() {
+            selectedCandies = getRandomCandies(counterValue);
+            currentSlide = 0;
+            
+            const carouselContainer = document.getElementById('carouselContainer');
+            carouselContainer.innerHTML = '';
+
+            selectedCandies.forEach((candy, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                if (index === 0) slide.classList.add('active');
+                
+                slide.innerHTML = `
+                    <img src="${candy.url}" alt="${candy.name}" class="candy-image">
+                    <div class="candy-name">${candy.name}</div>
+                `;
+                
+                carouselContainer.appendChild(slide);
+            });
+
+            const navElement = document.getElementById('carouselNav');
+            if (selectedCandies.length > 1) {
+                navElement.style.display = 'flex';
+            } else {
+                navElement.style.display = 'none';
+            }
+
+            updateIndicator();
+            document.getElementById('modalOverlay').classList.add('active');
+        }
+
+        function updateIndicator() {
+            const indicator = document.getElementById('carouselIndicator');
+            if (selectedCandies.length > 1) {
+                indicator.textContent = `Конфета ${currentSlide + 1} из ${selectedCandies.length}`;
+            } else {
+                indicator.textContent = '';
+            }
+        }
+
+        function nextSlide() {
+            const slides = document.querySelectorAll('.carousel-slide');
+            slides[currentSlide].classList.remove('active');
+            
+            currentSlide = (currentSlide + 1) % selectedCandies.length;
+            
+            slides[currentSlide].classList.add('active');
+            updateIndicator();
+        }
+
+        function prevSlide() {
+            const slides = document.querySelectorAll('.carousel-slide');
+            slides[currentSlide].classList.remove('active');
+            
+            currentSlide = (currentSlide - 1 + selectedCandies.length) % selectedCandies.length;
+            
+            slides[currentSlide].classList.add('active');
+            updateIndicator();
+        }
+
+        function closeModal(event) {
+            if (!event || event.target.id === 'modalOverlay') {
+                document.getElementById('modalOverlay').classList.remove('active');
+            }
+        }
+    </script>
+
+</body>
+</html>
