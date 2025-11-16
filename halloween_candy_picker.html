@@ -398,19 +398,19 @@
         let selectedCandies = [];
 
         const candies = [
-            { url: 'https://i.postimg.cc/tJBvfPfr/eye1.png', category: 'eye', name: 'Карамельный глаз' },
-            { url: 'https://i.postimg.cc/3RBt4mKG/fing1.png', category: 'fing', name: 'Зомби палец' },
-            { url: 'https://i.postimg.cc/50Ytjq5k/fing2.png', category: 'fing', name: 'Хрустящий палец' },
-            { url: 'https://i.postimg.cc/4xqqs6df/gh1.png', category: 'gh', name: 'Призрачная тянучка' },
-            { url: 'https://i.postimg.cc/FH78MW95/gh2.png', category: 'gh', name: 'Воздушное приведение' },
-            { url: 'https://i.postimg.cc/526Th7fG/gh3.png', category: 'gh', name: 'Леденец-призрак' },
-            { url: 'https://i.postimg.cc/Bb3GsxmB/gh4.png', category: 'gh', name: 'Мармеладный дух' },
-            { url: 'https://i.postimg.cc/B6KqJZsy/pump1.png', category: 'pump', name: 'Сахарная тыква' },
-            { url: 'https://i.postimg.cc/bwrfzY9F/pump2.png', category: 'pump', name: 'Карамельная тыква' },
-            { url: 'https://i.postimg.cc/XJd0T2cT/pump3.png', category: 'pump', name: 'Медовая тыква' },
-            { url: 'https://i.postimg.cc/fyshZx8M/sp1.png', category: 'sp', name: 'Лакричный паук' },
-            { url: 'https://i.postimg.cc/4d5W7VJV/sp2.png', category: 'sp', name: 'Шоколадный паук' },
-            { url: 'https://i.postimg.cc/503sYLx8/sp3.png', category: 'sp', name: 'Ядовитый паук' }
+            { url: 'sweets/eye1.png', category: 'eye', name: 'Карамельный глаз' },
+            { url: 'sweets/fing1.png', category: 'fing', name: 'Зомби палец' },
+            { url: 'sweets/fing2.png', category: 'fing', name: 'Хрустящий палец' },
+            { url: 'sweets/gh1.png', category: 'gh', name: 'Призрачная тянучка' },
+            { url: 'sweets/gh2.png', category: 'gh', name: 'Воздушное приведение' },
+            { url: 'sweets/gh3.png', category: 'gh', name: 'Леденец-призрак' },
+            { url: 'sweets/gh4.png', category: 'gh', name: 'Мармеладный дух' },
+            { url: 'sweets/pump1.png', category: 'pump', name: 'Сахарная тыква' },
+            { url: 'sweets/pump2.png', category: 'pump', name: 'Карамельная тыква' },
+            { url: 'sweets/pump3.png', category: 'pump', name: 'Медовая тыква' },
+            { url: 'sweets/sp1.png', category: 'sp', name: 'Лакричный паук' },
+            { url: 'sweets/sp2.png', category: 'sp', name: 'Шоколадный паук' },
+            { url: 'sweets/sp3.png', category: 'sp', name: 'Ядовитый паук' }
         ];
 
         function increaseCounter() {
@@ -461,16 +461,31 @@
             const carouselContainer = document.getElementById('carouselContainer');
             carouselContainer.innerHTML = '';
 
+            console.log('Selected candies:', selectedCandies); // Для отладки
+
             selectedCandies.forEach((candy, index) => {
                 const slide = document.createElement('div');
                 slide.className = 'carousel-slide';
                 if (index === 0) slide.classList.add('active');
                 
-                slide.innerHTML = `
-                    <img src="${candy.url}" alt="${candy.name}" class="candy-image">
-                    <div class="candy-name">${candy.name}</div>
-                `;
+                const img = document.createElement('img');
+                img.src = candy.url;
+                img.alt = candy.name;
+                img.className = 'candy-image';
+                img.crossOrigin = 'anonymous';
                 
+                // Обработка ошибки загрузки
+                img.onerror = function() {
+                    console.error('Failed to load image:', candy.url);
+                    this.style.display = 'none';
+                };
+                
+                const nameDiv = document.createElement('div');
+                nameDiv.className = 'candy-name';
+                nameDiv.textContent = candy.name;
+                
+                slide.appendChild(img);
+                slide.appendChild(nameDiv);
                 carouselContainer.appendChild(slide);
             });
 
