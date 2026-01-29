@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Птичник</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@200..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Yanone Kaffeesatz", sans-serif;
+            font-weight: 300;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            min-height: 100vh;
+            color: #fff;
+            font-size: 18px;
+            padding: 15px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            border: 2px solid #946b2d;
+        }
+
+        h1 {
+            font-family: 'Yanone Kaffeesatz', sans-serif;
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #946b2d;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            color: #C9A86A;
+            font-size: 1em;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        .progress-section {
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid #946b2d;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 35px;
+            background: rgba(21, 39, 63, 0.8);
+            border-radius: 17px;
+            overflow: hidden;
+            margin: 10px 0;
+            border: 2px solid #946b2d;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #946b2d 0%, #C9A86A 50%, #D4AF37 100%);
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1em;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .stat-box {
+            background: rgba(21, 39, 63, 0.6);
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            border: 1px solid #946b2d;
+        }
+
+        .stat-value {
+            font-size: 1.6em;
+            color: #C9A86A;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            font-size: 0.85em;
+            color: #E8D8C0;
+            margin-top: 3px;
+        }
+
+        .card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid #946b2d;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            color: #C9A86A;
+            margin-bottom: 12px;
+            font-size: 1.4em;
+            font-weight: 600;
+        }
+
+        .header-left h2 {
+            margin-bottom: 0;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            color: #E8D8C0;
+            margin-bottom: 4px;
+            font-size: 0.95em;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 8px;
+            background: rgba(21, 39, 63, 0.8);
+            border: 1px solid #946b2d;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 0.95em;
+            font-family: "Yanone Kaffeesatz", sans-serif;
+        }
+
+        input[type="text"]::placeholder {
+            color: #888;
+        }
+
+        button {
+            background: #946b2d;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-family: "Yanone Kaffeesatz", sans-serif;
+            font-size: 1em;
+        }
+
+        button:hover {
+            background: #C9A86A;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-small {
+            padding: 5px 12px;
+            font-size: 0.9em;
+        }
+
+        .tasks-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .task-option {
+            background: rgba(21, 39, 63, 0.6);
+            padding: 6px 10px;
+            border-radius: 4px;
+            border: 1px solid #946b2d;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9em;
+        }
+
+        .task-name {
+            color: #E8D8C0;
+        }
+
+        .task-cost {
+            color: #C9A86A;
+            font-weight: bold;
+        }
+
+        .history-list {
+            max-height: 350px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            background: rgba(21, 39, 63, 0.6);
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 8px;
+            border-left: 3px solid #946b2d;
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .history-name {
+            color: #C9A86A;
+            font-weight: bold;
+            font-size: 0.95em;
+        }
+
+        .history-feathers {
+            color: #D4AF37;
+            font-weight: bold;
+            font-size: 0.95em;
+        }
+
+        .history-task {
+            color: #E8D8C0;
+            font-size: 0.9em;
+        }
+
+        .history-footer {
+            font-size: 0.8em;
+            color: #888;
+            margin-top: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .delete-btn {
+            background: #8B4513;
+            padding: 3px 8px;
+            font-size: 0.85em;
+            margin-left: 10px;
+        }
+
+        .delete-btn:hover {
+            background: #A0522D;
+        }
+
+        .participant-input-wrapper {
+            display: flex;
+            gap: 8px;
+            align-items: flex-end;
+        }
+
+        .participant-input-wrapper .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        .toggle-btn {
+            background: #5D4C3A;
+            padding: 8px;
+            font-size: 0.9em;
+            white-space: nowrap;
+        }
+
+        .toggle-btn:hover {
+            background: #6B5A48;
+        }
+
+        #participantNameInput {
+            display: none;
+        }
+
+        #participantNameInput.active {
+            display: block;
+        }
+
+        #participantSelect {
+            display: block;
+        }
+
+        #participantSelect.hidden {
+            display: none;
+        }
+
+        .add-contribution-form {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+
+        .add-contribution-form .form-group {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 0;
+        }
+
+        .add-contribution-form button {
+            white-space: nowrap;
+        }
+
+        .collapse-btn {
+            background: transparent;
+            border: none;
+            color: #C9A86A;
+            cursor: pointer;
+            padding: 0;
+            font-size: 0.9em;
+            transition: transform 0.3s;
+            margin-left: 8px;
+        }
+
+        .collapse-btn:hover {
+            transform: scale(1.1);
+            background: transparent;
+        }
+
+        .collapse-btn.collapsed {
+            transform: rotate(-90deg);
+        }
+
+        .collapsible-content {
+            max-height: 1000px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .collapsible-content.collapsed {
+            max-height: 0;
+        }
+
+        .section-header-with-collapse {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .icon-btn {
+            background: rgba(21, 39, 63, 0.6);
+            border: 1px solid #946b2d;
+            color: #C9A86A;
+            padding: 5px 9px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: all 0.2s;
+            line-height: 1;
+        }
+
+        .icon-btn:hover {
+            background: rgba(21, 39, 63, 0.9);
+            color: #D4AF37;
+            transform: translateY(-1px);
+        }
+
+        .icon-btn.active {
+            background: #946b2d;
+            color: white;
+        }
+
+        .add-task-form {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+            align-items: stretch;
+        }
+
+        .add-task-form input {
+            flex: 2;
+            padding: 8px;
+            height: auto;
+        }
+
+        .add-task-form input[type="number"] {
+            flex: 1;
+            min-width: 100px;
+            padding: 8px;
+        }
+
+        .add-task-form button {
+            white-space: nowrap;
+            padding: 8px 12px;
+        }
+
+        .task-option-edit {
+            background: transparent;
+            padding: 8px 0;
+            border-radius: 0;
+            margin-bottom: 8px;
+            border: none;
+            border-bottom: 1px solid rgba(148, 107, 45, 0.3);
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .task-option-edit:last-child {
+            border-bottom: none;
+        }
+
+        .task-option-edit input[type="text"] {
+            flex: 2;
+            padding: 4px 8px;
+            margin: 0;
+        }
+
+        .task-option-edit input[type="number"] {
+            flex: 1;
+            min-width: 70px;
+            padding: 4px 8px;
+            margin: 0;
+        }
+
+        .task-option-edit button {
+            padding: 4px 8px;
+            font-size: 0.85em;
+        }
+
+        .task-delete-btn {
+            background: #8B4513;
+            padding: 4px 8px;
+            font-size: 0.85em;
+        }
+
+        .task-delete-btn:hover {
+            background: #A0522D;
+        }
+
+        .export-import-buttons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .export-import-buttons .icon-btn {
+            padding: 5px 8px;
+            font-size: 0.85em;
+        }
+
+        .history-header-with-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .history-header-with-buttons h2 {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .tasks-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.6em;
+            }
+
+            .participant-input-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .toggle-btn {
+                width: 100%;
+            }
+
+            .add-contribution-form {
+                flex-direction: column;
+            }
+
+            .add-contribution-form .form-group {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-kiwi-bird"></i> КОГТЕВРАНСКИЙ ПТИЧНИК <i class="fas fa-kiwi-bird"></i></h1>
+            <div class="subtitle">прогресс постройки</div>
+        </header>
+
+        <div class="progress-section">
+            <div class="section-header">
+                <h2>Общий прогресс</h2>
+                <button class="btn-small" onclick="saveProgressAsPNG()"><i class="fas fa-save"></i> Сохранить PNG</button>
+            </div>
+            <div class="progress-bar-container" id="progressBarContainer">
+                <div class="progress-bar" id="progressBar">0%</div>
+            </div>
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-value" id="currentFeathers">0</div>
+                    <div class="stat-label">Собрано перьев</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">164</div>
+                    <div class="stat-label">Цель</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="remainingFeathers">164</div>
+                    <div class="stat-label">Осталось</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Добавить вклад</h2>
+            <div class="add-contribution-form">
+                <div class="form-group">
+                    <label for="taskSelect">Задание:</label>
+                    <select id="taskSelect">
+                        <option value="">Выберите задание...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="participantSelect">Участник:</label>
+                    <select id="participantSelect" onchange="handleParticipantChange()">
+                        <option value="">Выберите участника...</option>
+                    </select>
+                    <input type="text" id="participantNameInput" placeholder="Введите имя нового участника">
+                </div>
+                <button class="toggle-btn" onclick="toggleInputMode()">+ Новый</button>
+                <button onclick="addContribution()">Добавить перья</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="section-header-with-collapse">
+                <div class="header-left">
+                    <button class="collapse-btn collapsed" onclick="toggleTaskList()">▼</button>
+                    <h2>Список заданий</h2>
+                </div>
+                <div class="header-buttons">
+                    <button class="icon-btn" id="editTasksBtn" onclick="toggleEditMode()">
+                        <i class="fas fa-pencil-alt"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="taskListContent" class="collapsible-content collapsed">
+                <div id="addTaskFormContainer" style="display: none;">
+                    <div class="add-task-form">
+                        <input type="text" id="newTaskName" placeholder="Название задания">
+                        <input type="number" id="newTaskCost" placeholder="Перья" min="1">
+                        <button onclick="addCustomTask()"><i class="fas fa-plus"></i> Добавить</button>
+                    </div>
+                </div>
+                <div id="tasksListView" class="tasks-grid"></div>
+                <div id="tasksListEdit" style="display: none;"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="history-header-with-buttons">
+                <h2>История вкладов</h2>
+                <div class="export-import-buttons">
+                    <button class="icon-btn" onclick="exportData()" title="Экспорт данных">
+                        <i class="fas fa-download"></i>
+                    </button>
+                    <button class="icon-btn" onclick="importData()" title="Импорт данных">
+                        <i class="fas fa-upload"></i>
+                    </button>
+                    <input type="file" id="importFileInput" accept=".json" style="display: none;" onchange="handleFileImport(event)">
+                </div>
+            </div>
+            <div class="history-list" id="historyList"></div>
+        </div>
+    </div>
+
+    <script>
+        const GOAL = 164;
+        
+        let tasks = [
+            { name: 'Домашняя работа (основа или доп.)', cost: 5 },
+            { name: 'Песня', cost: 4 },
+            { name: 'Статья в Перо Ровены', cost: 5 },
+            { name: 'Отзыв в Лит. клубе', cost: 1 },
+            { name: 'Пост на факультете', cost: 2 },
+            { name: 'Забота о фруктовом саде (РПГ)', cost: 3 },
+            { name: 'Кроссворд (малый)', cost: 2 },
+            { name: 'Кроссворд (средний)', cost: 3 },
+            { name: 'Кроссворд (большой)', cost: 4 },
+            { name: 'Плей-лист', cost: 1 },
+            { name: '10 игр в Разговорной', cost: 1 },
+            { name: 'Идея направления магазина', cost: 3 },
+            { name: 'Единица товара магазина', cost: 1 }
+        ];
+
+        let contributions = [];
+        let participants = [];
+        let isNewParticipantMode = false;
+        let isEditMode = false;
+
+        function loadData() {
+            const savedContributions = localStorage.getItem('aviaryData');
+            const savedParticipants = localStorage.getItem('aviaryParticipants');
+            const savedTasks = localStorage.getItem('aviaryTasks');
+            
+            if (savedContributions) {
+                contributions = JSON.parse(savedContributions);
+            }
+            
+            if (savedParticipants) {
+                participants = JSON.parse(savedParticipants);
+            }
+
+            if (savedTasks) {
+                tasks = JSON.parse(savedTasks);
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem('aviaryData', JSON.stringify(contributions));
+            localStorage.setItem('aviaryParticipants', JSON.stringify(participants));
+            localStorage.setItem('aviaryTasks', JSON.stringify(tasks));
+        }
+
+        function toggleInputMode() {
+            isNewParticipantMode = !isNewParticipantMode;
+            const selectElem = document.getElementById('participantSelect');
+            const inputElem = document.getElementById('participantNameInput');
+            const btnElem = document.querySelector('.toggle-btn');
+            
+            if (isNewParticipantMode) {
+                selectElem.classList.add('hidden');
+                inputElem.classList.add('active');
+                btnElem.textContent = '← К списку';
+            } else {
+                selectElem.classList.remove('hidden');
+                inputElem.classList.remove('active');
+                btnElem.textContent = '+ Новый';
+            }
+        }
+
+        function toggleEditMode() {
+            isEditMode = !isEditMode;
+            const editBtn = document.getElementById('editTasksBtn');
+            const addFormContainer = document.getElementById('addTaskFormContainer');
+            const viewList = document.getElementById('tasksListView');
+            const editList = document.getElementById('tasksListEdit');
+
+            if (isEditMode) {
+                editBtn.classList.add('active');
+                addFormContainer.style.display = 'block';
+                viewList.style.display = 'none';
+                editList.style.display = 'block';
+                renderTasksEditMode();
+            } else {
+                editBtn.classList.remove('active');
+                addFormContainer.style.display = 'none';
+                viewList.style.display = 'grid';
+                editList.style.display = 'none';
+            }
+        }
+
+        function renderTasksEditMode() {
+            const editList = document.getElementById('tasksListEdit');
+            editList.innerHTML = '';
+
+            tasks.forEach((task, index) => {
+                const taskDiv = document.createElement('div');
+                taskDiv.className = 'task-option-edit';
+                taskDiv.innerHTML = `
+                    <input type="text" value="${task.name}" onchange="updateTaskInEdit(${index}, 'name', this.value)">
+                    <input type="number" value="${task.cost}" min="1" onchange="updateTaskInEdit(${index}, 'cost', this.value)">
+                    <button class="task-delete-btn" onclick="deleteTask(${index})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                `;
+                editList.appendChild(taskDiv);
+            });
+        }
+
+        function updateTaskInEdit(index, field, value) {
+            if (field === 'name') {
+                tasks[index].name = value.trim();
+            } else if (field === 'cost') {
+                const cost = parseInt(value);
+                if (cost >= 1) {
+                    tasks[index].cost = cost;
+                }
+            }
+            saveData();
+            initTasksList();
+        }
+
+        function deleteTask(index) {
+            if (confirm('Удалить это задание?')) {
+                tasks.splice(index, 1);
+                saveData();
+                initTasksList();
+                renderTasksEditMode();
+            }
+        }
+
+        function handleParticipantChange() {
+            // Просто для совместимости, если понадобится
+        }
+
+        function updateParticipantsList() {
+            const select = document.getElementById('participantSelect');
+            select.innerHTML = '<option value="">Выберите участника...</option>';
+            
+            participants.forEach(name => {
+                const option = document.createElement('option');
+                option.value = name;
+                option.textContent = name;
+                select.appendChild(option);
+            });
+        }
+
+        function addCustomTask() {
+            const name = document.getElementById('newTaskName').value.trim();
+            const cost = parseInt(document.getElementById('newTaskCost').value);
+
+            if (!name) {
+                alert('Введите название задания');
+                return;
+            }
+
+            if (!cost || cost < 1) {
+                alert('Введите стоимость задания (минимум 1 перо)');
+                return;
+            }
+
+            tasks.push({ name, cost });
+            saveData();
+            initTasksList();
+            renderTasksEditMode();
+
+            document.getElementById('newTaskName').value = '';
+            document.getElementById('newTaskCost').value = '';
+        }
+
+        function toggleTaskList() {
+            const content = document.getElementById('taskListContent');
+            const btn = document.querySelector('.collapse-btn');
+            
+            content.classList.toggle('collapsed');
+            btn.classList.toggle('collapsed');
+        }
+
+        function initTasksList() {
+            const tasksList = document.getElementById('tasksListView');
+            const taskSelect = document.getElementById('taskSelect');
+            
+            tasksList.innerHTML = '';
+            taskSelect.innerHTML = '<option value="">Выберите задание...</option>';
+            
+            tasks.forEach((task, index) => {
+                const taskDiv = document.createElement('div');
+                taskDiv.className = 'task-option';
+                taskDiv.innerHTML = `
+                    <span class="task-name">${task.name}</span>
+                    <span class="task-cost"><i class="fas fa-feather-alt"></i> ${task.cost}</span>
+                `;
+                tasksList.appendChild(taskDiv);
+                
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = `${task.name} (${task.cost} пер.)`;
+                taskSelect.appendChild(option);
+            });
+        }
+
+        function addContribution() {
+            let name;
+            
+            if (isNewParticipantMode) {
+                name = document.getElementById('participantNameInput').value.trim();
+                if (name && !participants.includes(name)) {
+                    participants.push(name);
+                    updateParticipantsList();
+                }
+            } else {
+                name = document.getElementById('participantSelect').value;
+            }
+            
+            const taskIndex = document.getElementById('taskSelect').value;
+            
+            if (!name) {
+                alert('Пожалуйста, выберите или введите имя участника');
+                return;
+            }
+            
+            if (taskIndex === '') {
+                alert('Пожалуйста, выберите задание');
+                return;
+            }
+            
+            const task = tasks[parseInt(taskIndex)];
+            const contribution = {
+                id: Date.now(),
+                participant: name,
+                task: task.name,
+                feathers: task.cost,
+                date: new Date().toLocaleString('ru-RU')
+            };
+            
+            contributions.unshift(contribution);
+            saveData();
+            updateDisplay();
+            
+            document.getElementById('participantNameInput').value = '';
+            document.getElementById('participantSelect').value = '';
+            document.getElementById('taskSelect').value = '';
+        }
+
+        function deleteContribution(id) {
+            if (confirm('Удалить этот вклад?')) {
+                contributions = contributions.filter(c => c.id !== id);
+                saveData();
+                updateDisplay();
+            }
+        }
+
+        function exportData() {
+            const data = {
+                contributions,
+                participants,
+                tasks,
+                exportDate: new Date().toISOString()
+            };
+
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `ravenclaw_aviary_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function importData() {
+            document.getElementById('importFileInput').click();
+        }
+
+        function handleFileImport(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    
+                    if (confirm('Импортировать данные? Текущие данные будут заменены.')) {
+                        if (data.contributions) contributions = data.contributions;
+                        if (data.participants) participants = data.participants;
+                        if (data.tasks) tasks = data.tasks;
+                        
+                        saveData();
+                        initTasksList();
+                        updateParticipantsList();
+                        updateDisplay();
+                        
+                        alert('Данные успешно импортированы!');
+                    }
+                } catch (error) {
+                    alert('Ошибка при чтении файла. Убедитесь, что это правильный файл экспорта.');
+                }
+            };
+            reader.readAsText(file);
+            
+            // Сбрасываем input для повторного импорта
+            event.target.value = '';
+        }
+
+        function updateDisplay() {
+            const totalFeathers = contributions.reduce((sum, c) => sum + c.feathers, 0);
+            const percentage = Math.min((totalFeathers / GOAL) * 100, 100);
+            const remaining = Math.max(GOAL - totalFeathers, 0);
+            
+            document.getElementById('currentFeathers').textContent = totalFeathers;
+            document.getElementById('remainingFeathers').textContent = remaining;
+            document.getElementById('progressBar').style.width = percentage + '%';
+            document.getElementById('progressBar').textContent = percentage.toFixed(1) + '%';
+            
+            const historyList = document.getElementById('historyList');
+            if (contributions.length === 0) {
+                historyList.innerHTML = '<div style="text-align: center; color: #888; padding: 20px;">Пока нет вкладов</div>';
+            } else {
+                historyList.innerHTML = contributions.map(c => `
+                    <div class="history-item">
+                        <div class="history-header">
+                            <span class="history-name">${c.participant}</span>
+                            <span class="history-feathers">+${c.feathers} <i class="fas fa-feather-alt"></i></span>
+                        </div>
+                        <div class="history-task">${c.task}</div>
+                        <div class="history-footer">
+                            <span>${c.date}</span>
+                            <button class="delete-btn" onclick="deleteContribution(${c.id})">Удалить</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        async function saveProgressAsPNG() {
+            const container = document.getElementById('progressBarContainer');
+            const totalFeathers = contributions.reduce((sum, c) => sum + c.feathers, 0);
+            const percentage = Math.min((totalFeathers / GOAL) * 100, 100);
+            
+            // Создаем canvas
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Размеры canvas
+            const width = 800;
+            const height = 120;
+            canvas.width = width;
+            canvas.height = height;
+            
+            // Прозрачный фон
+            ctx.clearRect(0, 0, width, height);
+            
+            const barX = 10;
+            const barY = 30;
+            const barWidth = width - 20;
+            const barHeight = 50;
+            const borderRadius = 25;
+            
+            // Рисуем фон прогресс-бара
+            ctx.fillStyle = 'rgba(21, 39, 63, 0.9)';
+            ctx.beginPath();
+            ctx.roundRect(barX, barY, barWidth, barHeight, borderRadius);
+            ctx.fill();
+            
+            // Рисуем заполнение прогресса (ВНУТРИ границ)
+            if (percentage > 0) {
+                const fillWidth = (barWidth * percentage) / 100;
+                
+                // Создаем путь для заливки с учетом скругления
+                ctx.save();
+                ctx.beginPath();
+                
+                if (percentage >= 100) {
+                    // Если 100%, используем те же скругления
+                    ctx.roundRect(barX, barY, fillWidth, barHeight, borderRadius);
+                } else {
+                    // Если меньше 100%, скругляем только левую сторону
+                    ctx.moveTo(barX + borderRadius, barY);
+                    ctx.lineTo(barX + fillWidth, barY);
+                    ctx.lineTo(barX + fillWidth, barY + barHeight);
+                    ctx.lineTo(barX + borderRadius, barY + barHeight);
+                    ctx.arc(barX + borderRadius, barY + barHeight - borderRadius, borderRadius, Math.PI / 2, Math.PI, false);
+                    ctx.lineTo(barX, barY + borderRadius);
+                    ctx.arc(barX + borderRadius, barY + borderRadius, borderRadius, Math.PI, Math.PI * 1.5, false);
+                }
+                
+                ctx.closePath();
+                ctx.clip();
+                
+                // Применяем градиент
+                const gradient = ctx.createLinearGradient(barX, 0, barX + fillWidth, 0);
+                gradient.addColorStop(0, '#946b2d');
+                gradient.addColorStop(0.5, '#C9A86A');
+                gradient.addColorStop(1, '#D4AF37');
+                
+                ctx.fillStyle = gradient;
+                ctx.fill();
+                
+                ctx.restore();
+            }
+            
+            // Рисуем бордер ПОВЕРХ всего
+            ctx.strokeStyle = '#946b2d';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.roundRect(barX, barY, barWidth, barHeight, borderRadius);
+            ctx.stroke();
+            
+            // Рисуем текст процента
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 28px "Yanone Kaffeesatz", sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
+            ctx.shadowBlur = 4;
+            ctx.shadowOffsetX = 2;
+            ctx.shadowOffsetY = 2;
+            ctx.fillText(percentage.toFixed(1) + '%', width / 2, barY + barHeight / 2);
+            
+            // Рисуем заголовок
+            ctx.shadowBlur = 3;
+            ctx.shadowOffsetX = 1;
+            ctx.shadowOffsetY = 1;
+            ctx.font = 'bold 24px "Yanone Kaffeesatz", sans-serif';
+            ctx.fillStyle = '#C9A86A';
+            ctx.fillText('ПОСТРОЙКА КОГТЕВРАНСКОГО ПТИЧНИКА', width / 2, 15);
+            
+            // Рисуем статистику
+            ctx.shadowBlur = 2;
+            ctx.font = '18px "Yanone Kaffeesatz", sans-serif';
+            ctx.fillStyle = '#E8D8C0';
+            ctx.fillText(`Собрано: ${totalFeathers} перьев | Цель: ${GOAL} перьев | Осталось: ${GOAL - totalFeathers} перьев`, width / 2, 100);
+            
+            // Конвертируем в PNG и скачиваем
+            canvas.toBlob(blob => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `ravenclaw_progress_${percentage.toFixed(0)}%.png`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }, 'image/png');
+        }
+
+        window.addEventListener('load', () => {
+            loadData();
+            initTasksList();
+            updateParticipantsList();
+            updateDisplay();
+        });
+    </script>
+</body>
+</html>
